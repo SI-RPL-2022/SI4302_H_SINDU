@@ -9,9 +9,14 @@
     <title>Document 297BBF</title>
 </head>
     <style>
-        *{
+    {
+        html, body{
             margin: 0;
             padding: 0;
+            overflow-x:hidden;
+        },
+
+        *{
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
@@ -26,7 +31,7 @@
         }
     </style>
 <body>
-    <footer class="footer" style="position:relative;">
+    <footer class="footer">
         <div class="footer-content text-white pt-5 pb-5" style="background-color:#297BBF">
             <div class="row ms-5">
                 <div class="footer-col col-6 mt-2">
@@ -54,7 +59,7 @@
             </div>
             <div class="row ms-5">
                 <div class="col-1">
-                    <h3 class="fw-bold ms-1">Sindu</h3>
+                    <h3 class="fw-bold ms-2">Sindu</h3>
                 </div>
                 <div class="col">
                     <ul class="social" style="list-style:none; display:flex;">
