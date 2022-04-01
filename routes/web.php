@@ -13,11 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('layouts.app');
+// });
 
 Auth::routes();
+
+Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('landing.page');
+// Route::get('/', [App\Http\Controllers\WebController::class, 'donasi'])->name('donasi');
+// Route::get('/', [App\Http\Controllers\WebController::class, 'about'])->name('about');
 
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('admin_level');
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
