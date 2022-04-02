@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DonasiCreateMail;
 use App\Models\Donasi;
 
 class DonasiController extends Controller
@@ -45,6 +47,9 @@ class DonasiController extends Controller
         $model->deskripsi_donasi = $request->deskripsi_donasi;
         $model->bukti_transfer = $request->bukti_transfer;
         $model->save();
+
+        \Mail::to($model->email_donatur)->send(new DonasiCreateMail($model));
+
         return redirect('/donasi/create');
     }
 

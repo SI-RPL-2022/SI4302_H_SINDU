@@ -51,27 +51,27 @@
         <div class="card">
             <div class="card-body">
             <h2 style="text-align:center;">Form Donasi</h2>
-            <form action="{{url('/donasi/create')}}" method="POST">
+            <form action="{{url('/donasi/create')}}" class="contact100-form validate-form" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="nama_donatur" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="nama_donatur" name="nama_donatur">
+                    <input type="text" class="form-control" id="nama_donatur" name="nama_donatur" required>
                 </div>
                 <div class="mb-3">
                     <label for="email_donatur" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email_donatur" aria-describedby="emailHelp" name="email_donatur">
+                    <input type="email" class="form-control" id="email_donatur" aria-describedby="emailHelp" name="email_donatur" required>
                 </div>
                 <div class="mb-3">
                     <label for="total_donasi" class="form-label">Total Donasi</label>
-                    <input type="number" class="form-control" id="total_donasi" name="total_donasi">
+                    <input type="number" class="form-control" id="total_donasi" name="total_donasi" required>
                 </div>
                 <div class="mb-3">
                     <label for="deskripsi_donasi" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="deskripsi_donasi" rows="2" name="deskripsi_donasi"></textarea>
+                    <textarea class="form-control" id="deskripsi_donasi" rows="2" name="deskripsi_donasi" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="bukti_transfer" class="form-label">Bukti Transfer</label>
-                    <input class="form-control" type="file" id="bukti_transfer" name="bukti_transfer">
+                    <input class="form-control" type="file" id="bukti_transfer" name="bukti_transfer" required>
                 </div>
                 <button type="submit" class="btn" style="background-color:#297BBF; color:#fff;">Kirim</button>
             </form>

@@ -18,8 +18,6 @@ use App\Http\Controllers\DonasiController;
 //     return view('layouts.app');
 // });
 
-
-
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('landing.page');
