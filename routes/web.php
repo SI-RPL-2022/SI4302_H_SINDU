@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DonasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,6 @@ Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('lan
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('admin_level');
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
 
-// Nyobain aja
-Route::get('/coba', function () {
-    return view('partials.footer');
-});
+// Route Donasi
+Route::post('/donasi/create', [App\Http\Controllers\DonasiController::class, 'store'])->name('donasi.store');
+Route::get('/donasi/create', [App\Http\Controllers\DonasiController::class, 'create'])->name('donasi.create');
