@@ -50,7 +50,7 @@ class DonasiController extends Controller
 
         \Mail::to($model->email_donatur)->send(new DonasiCreateMail($model));
 
-        return redirect('/donasi/create');
+        return redirect('/donasi/create')->with('success', 'Data Berhasil Tersimpan!');
     }
 
     /**
