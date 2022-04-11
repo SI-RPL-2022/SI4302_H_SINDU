@@ -24,9 +24,13 @@ Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('lan
 // Route::get('/', [App\Http\Controllers\WebController::class, 'donasi'])->name('donasi');
 // Route::get('/', [App\Http\Controllers\WebController::class, 'about'])->name('about');
 
-<<<<<<< HEAD
-//ADMIN ACCESS
+// ADMIN ACCESS
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('admin_level');
+Route::get('/admin/testimoni', [App\Http\Controllers\AdminController::class, 'showTestimoni'])->name('admin.show.testimoni')->middleware('admin_level'); 
+Route::post('/admin/testimoni/store', [App\Http\Controllers\AdminController::class, 'storeTestimoni'])->name('admin.store.testimoni')->middleware('admin_level');
+Route::post('/admin/testimoni/update/{id}', [App\Http\Controllers\AdminController::class, 'updateTestimoni'])->middleware('admin_level');
+Route::get('/admin/testimoni/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteTestimoni'])->middleware('admin_level');
+Route::get('/admin/testimoni/cari', [App\Http\Controllers\AdminController::class, 'cariTestimoni'])->name('admin.cari.testimoni')->middleware('admin_level');
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
@@ -41,20 +45,3 @@ Route::get('/relawan/materi/cari', [App\Http\Controllers\RelawanController::clas
 // Route Donasi
 Route::post('/donasi/create', [App\Http\Controllers\DonasiController::class, 'store'])->name('donasi.store');
 Route::get('/donasi/create', [App\Http\Controllers\DonasiController::class, 'create'])->name('donasi.create');
-=======
-// ADMIN ACCESS
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('admin_level');
-Route::get('/admin/testimoni', [App\Http\Controllers\AdminController::class, 'showTestimoni'])->name('admin.show.testimoni')->middleware('admin_level'); 
-Route::post('/admin/testimoni/store', [App\Http\Controllers\AdminController::class, 'storeTestimoni'])->name('admin.store.testimoni')->middleware('admin_level');
-Route::post('/admin/testimoni/update/{id}', [App\Http\Controllers\AdminController::class, 'updateTestimoni'])->middleware('admin_level');
-Route::get('/admin/testimoni/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteTestimoni'])->middleware('admin_level');
-Route::get('/admin/testimoni/cari', [App\Http\Controllers\AdminController::class, 'cariTestimoni'])->name('admin.cari.testimoni')->middleware('admin_level');
-
-Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
-
-
-// Nyobain aja
-Route::get('/coba', function () {
-    return view('partials.footer');
-});
->>>>>>> S1-US08_Laman-testi

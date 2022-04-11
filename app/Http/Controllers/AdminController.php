@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-use Illuminate\Support\Facades\DB;
-=======
 use App\Models\Testimoni;
 use Illuminate\Support\Facades\DB;
 use Auth;
->>>>>>> S1-US08_Laman-testi
 
 class AdminController extends Controller
 {
@@ -33,8 +29,6 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-<<<<<<< HEAD
-=======
     public function showTestimoni()
     {
         $data = DB::table('testimoni')                
@@ -103,6 +97,5 @@ class AdminController extends Controller
 
         return view('admin.show_testimoni', compact('data'));
     }
->>>>>>> S1-US08_Laman-testi
 }
 
