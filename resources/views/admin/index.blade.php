@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
+
+@section('title', 'Dashboard')
+
+@section('title-page', 'Dashboard')
 
 @section('content')
 <div class="container">
@@ -14,7 +18,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }} SELAMAT DATANG ADMIN
+                    {{ __('You are logged in!') }} SELAMAT DATANG {{ Auth::user()->name }}
                 </div>
             </div>
         </div>
