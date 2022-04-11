@@ -25,8 +25,16 @@ Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('lan
 // Route::get('/', [App\Http\Controllers\WebController::class, 'donasi'])->name('donasi');
 // Route::get('/', [App\Http\Controllers\WebController::class, 'about'])->name('about');
 
+// ADMIN ACCESS
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('admin_level');
+Route::get('/admin/testimoni', [App\Http\Controllers\AdminController::class, 'showTestimoni'])->name('admin.show.testimoni')->middleware('admin_level'); 
+Route::post('/admin/testimoni/store', [App\Http\Controllers\AdminController::class, 'storeTestimoni'])->name('admin.store.testimoni')->middleware('admin_level');
+Route::post('/admin/testimoni/update/{id}', [App\Http\Controllers\AdminController::class, 'updateTestimoni'])->middleware('admin_level');
+Route::get('/admin/testimoni/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteTestimoni'])->middleware('admin_level');
+Route::get('/admin/testimoni/cari', [App\Http\Controllers\AdminController::class, 'cariTestimoni'])->name('admin.cari.testimoni')->middleware('admin_level');
+
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
+
 
 // Nyobain aja
 Route::get('/coba', function () {
