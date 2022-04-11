@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Mata_Pelajaran;
+use App\Models\Materi;
+use Auth;
 
 class RelawanController extends Controller
 {
@@ -13,7 +17,7 @@ class RelawanController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth');        
     }
 
     /**
@@ -24,5 +28,135 @@ class RelawanController extends Controller
     public function index()
     {
         return view('relawan.index');
+    }
+
+    public function showMateri()
+    {        
+        $data = DB::table('materi')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')
+                ->join('users', 'users.id', '=', 'materi.id_users')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'materi.created_at',
+                        'materi.status', 'materi.id_materi', 'materi.slug', 'materi.cover_materi',
+                        'deskripsi_materi', 'video_materi')
+                ->where('materi.id_users', Auth::user()->id)
+                ->orderBy('materi.created_at', 'DESC')
+                ->get();
+
+        return view('relawan.show_materi', compact('data'));
+    }
+
+    public function tambahMateri()
+    {
+        $mapel = Mata_Pelajaran::all();
+        return view('relawan.tambah_materi', compact('mapel'));
+    }
+
+    public function storeMateri(Request $request)
+    {
+        $validate = $request->validate([
+            'id_users' => 'required',
+            'id_mata_pelajaran' => 'required',
+            'judul_materi' => 'required|unique:materi',
+            'cover_materi' => 'required|image|mimes:jpeg,png,jpg|dimensions:width=1920,height=1080',
+            'deskripsi_materi' => 'required'            
+        ]);
+
+        $cover_materi = time().'.'.$request->cover_materi->extension();
+        $request->cover_materi->move(public_path('image/cover'), $cover_materi);
+        
+        if($request->video_materi == ''){
+            $materi = Materi::create([
+                'id_users' => $request->id_users,
+                'id_mata_pelajaran' => $request->id_mata_pelajaran,               
+                'judul_materi' => $request->judul_materi,
+                'cover_materi' => $cover_materi,            
+                'slug' => \Str::slug($request->judul_materi),
+                'deskripsi_materi' => $request->deskripsi_materi,    
+                'video_materi' => "Tidak Ada",            
+                'status' => "Menunggu"            
+            ]);           
+        }elseif($request->video_materi != ''){
+            $materi = Materi::create([
+                'id_users' => $request->id_users,
+                'id_mata_pelajaran' => $request->id_mata_pelajaran,               
+                'judul_materi' => $request->judul_materi,
+                'cover_materi' => $cover_materi,            
+                'slug' => \Str::slug($request->judul_materi),
+                'deskripsi_materi' => $request->deskripsi_materi,
+                'video_materi' => $request->video_materi,
+                'status' => "Menunggu"            
+            ]);           
+        }
+        return redirect(route('relawan.show.materi'))->with('success', 'Data Berhasil Ditambahkan');
+    }    
+
+    public function editMateri($id)
+    {
+        $data = Materi::find($id);
+        $mapel = Mata_Pelajaran::all();
+
+        return view('relawan.edit_materi', compact('data', 'mapel'));
+    }
+
+    public function updateMateri(Request $request, $id)
+    {
+        $data = Materi::find($id);                    
+
+        $validate = $request->validate([
+            'id_users' => 'required',
+            'id_mata_pelajaran' => 'required',
+            'judul_materi' => 'required',
+            'cover_materi_new' => 'image|mimes:jpeg,png,jpg|dimensions:width=1920,height=1080',
+            'deskripsi_materi' => 'required'                                   
+        ]);
+
+        $data->id_users = $request->id_users;
+        $data->id_mata_pelajaran = $request->id_mata_pelajaran;        
+        $data->judul_materi = $request->judul_materi;
+        $data->slug = \Str::slug($request->judul_materi);
+        $data->deskripsi_materi = $request->deskripsi_materi;
+
+        if($request->video_materi == ''){
+            $data->video_materi = "Tidak Ada";
+        }elseif($request->video_materi != ''){
+            $data->video_materi = $request->video_materi;
+        }
+
+        $data->status = "Menunggu";
+    
+        if($request->cover_materi_new == NULL){
+            $data->cover_materi = $request->cover_materi;
+        }else{
+            $cover_materi = time().'.'.$request->cover_materi_new->extension();
+            $request->cover_materi_new->move(public_path('image/cover'), $cover_materi);
+            $data->cover_materi = $cover_materi;
+        }           
+        $data->save();
+        
+        return redirect(route('relawan.show.materi'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteMateri($id)
+    {
+        DB::table('materi')->where('id_materi', $id)->delete();        
+
+        return redirect(route('relawan.show.materi'))->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function cariMateri(Request $request)
+    {
+        $keyword = $request->cari;
+        $data = DB::table('materi')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')
+                ->join('users', 'users.id', '=', 'materi.id_users')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'materi.created_at',
+                        'materi.status', 'materi.id_materi', 'materi.slug', 'materi.cover_materi',
+                        'deskripsi_materi', 'video_materi')
+                ->where('materi.id_users', Auth::user()->id)
+                ->orderBy('materi.created_at', 'DESC')
+                ->where('materi.judul_materi', 'like', "%". $keyword . "%")
+                ->get();
+
+        return view('relawan.show_materi', compact('data'));
     }
 }

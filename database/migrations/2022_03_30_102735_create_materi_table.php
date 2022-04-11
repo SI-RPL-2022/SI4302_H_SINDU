@@ -17,8 +17,8 @@ class CreateMateriTable extends Migration
             $table->id('id_materi');
             $table->bigInteger('id_users')->unsigned();
             $table->foreign('id_users')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('id_mate_pelajaran')->unsigned();
-            $table->foreign('id_mate_pelajaran')->references('id_mate_pelajaran')->on('mata_pelajaran')->onUpdate('cascade')->onDelete('cascade');
+            $table->bigInteger('id_mata_pelajaran')->unsigned();
+            $table->foreign('id_mata_pelajaran')->references('id_mata_pelajaran')->on('mata_pelajaran')->onUpdate('cascade')->onDelete('cascade');
             $table->string('judul_materi');
             $table->string('cover_materi');
             $table->string('slug');

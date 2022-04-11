@@ -29,8 +29,8 @@
                     </li> --}}
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <button id="login-btn" class="btn text-light bg-sindu"
-                                href="{{ route('login') }}">{{ __('Masuk') }}</button>
+                            <a id="login-btn" class="btn text-light bg-sindu"
+                                href="{{ route('login') }}">{{ __('Masuk') }}</a>
                         </li>
                     @endif
 
