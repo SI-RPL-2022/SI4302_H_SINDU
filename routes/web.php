@@ -28,6 +28,6 @@ Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('lan
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('admin_level');
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
 
-// Nyobain aja
+// Google Auth
 Route::get('redirect', [App\Http\Controllers\SocialController::class, 'redirect']);
 Route::get('callback/google', [App\Http\Controllers\SocialController::class, 'callback']);
