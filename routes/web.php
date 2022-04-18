@@ -29,6 +29,5 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->na
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
 
 // Nyobain aja
-Route::get('/coba', function () {
-    return view('partials.footer');
-});
+Route::get('redirect', [App\Http\Controllers\SocialController::class, 'redirect']);
+Route::get('callback/google', [App\Http\Controllers\SocialController::class, 'callback']);

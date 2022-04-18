@@ -80,9 +80,9 @@
                             </button>
                         </div>
                         <div class="col-md-6 d-grid">
-                            <button type="submit" class="btn btn-light text-sindu"><i class="fa-brands fa-google"></i>
+                            <a class="btn btn-light text-sindu" href="/redirect"><i class="fa-brands fa-google"></i>
                                 {{ __('Daftar dengan Google') }}
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <div class="row mb-3 px-3">
