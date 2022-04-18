@@ -42,7 +42,7 @@
                 <a href="https://wa.me/+6282236056658">
                     <img src="https://drive.google.com/uc?export=view&id=1x-s4ptFO022bMUGq6i6DnmFVMor5NTxv" width="80px" height="80px"/>
                 </a>
-                <a href="mailto:sindu@gmail.com">
+                <a href="mailto:sincereeducation22@gmail.com">
                     <img src="https://drive.google.com/uc?export=view&id=1fpjr6XPCp4-QUwxwpiP0Ml2bV-fHtzf7" width="80px" height="60.31px"/>
                 </a>
             </div>
