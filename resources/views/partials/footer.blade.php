@@ -41,7 +41,7 @@
                 <div class="footer-col col mt-2 ">
                     <p class="fw-bold">Sindu</p>
                     <a href="" class="text-white text-decoration-none">Tentang Kami</a> <br>
-                    <a href="" class="text-white text-decoration-none">Donasi</a> <br>
+                    <a href="{{ route('donasi.create') }}" class="text-white text-decoration-none">Donasi</a> <br>
                     <a href="" class="text-white text-decoration-none">Umpan Balik</a> <br>
                     <a href="" class="text-white text-decoration-none">Syarat dan Ketentuan</a> <br>
                     <a href="" class="text-white text-decoration-none">Kebijakan Privasi</a> <br>
@@ -50,8 +50,8 @@
                 </div>
                 <div class="footer-col col mt-2">
                     <p class="fw-bold">Sincerely, for you</p>
-                    <a href="" class="text-white text-decoration-none">Menjadi Relawan</a> <br>
-                    <a href="" class="text-white text-decoration-none">Cari Relawan</a> <br>
+                    <a href="/register" class="text-white text-decoration-none">Menjadi Relawan</a> <br>
+                    <a href="{{ route('request_volunteer.create') }}" class="text-white text-decoration-none">Cari Relawan</a> <br>
                     <a href="" class="text-white text-decoration-none">Materi Belajar</a> <br>
                     <a href="" class="text-white text-decoration-none">Panduan Relawan</a> <br>
                     <a href="" class="text-white text-decoration-none">Panduan Organisasi</a> 
