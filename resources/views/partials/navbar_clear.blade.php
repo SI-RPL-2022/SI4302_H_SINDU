@@ -1,7 +1,7 @@
-<nav id="navbar" class="navbar navbar-expand-md py-3 sticky-top">
-    <div class="container">
-        <a id="navbar-brand" class="navbar-brand d-flex" href="{{ url('/') }}">
-            <h3 class="text-light">Sin</h3><h3>du</h3>
+<nav id="navbar" class="navbar navbar-expand-md py-1 sticky-top gradient-y">
+    <div class="container align-items-center">
+        <a id="navbar-brand" class="align-items-center navbar-brand d-flex" href="{{ url('/') }}">
+            <h3 class="text-light text-shadow">Sin</h3><h3 class="text-shadow">du</h3>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -69,13 +69,13 @@
     
     function scrollFunction() {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.getElementById("navbar").style.background = "#4285F4";
+        document.getElementById("navbar").style.background = "#297BBF";
         document.getElementById("navbar").style.transition = "1s";
         var login = document.getElementById("login-btn"); 
         login.classList.remove("bg-sindu")
         login.classList.remove("text-light")
         login.classList.add("bg-light");
-        login.style.color = "#4285F4"
+        login.style.color = "#297BBF"
         login.style.transition = "1s" ;
         document.getElementById("logo").style.fontSize = "35px";
       } else {

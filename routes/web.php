@@ -49,3 +49,6 @@ Route::get('/donasi/create', [App\Http\Controllers\DonasiController::class, 'cre
 // Route GUEST
 Route::post('/request-volunteer', [App\Http\Controllers\GuestController::class, 'store'])->name('request_volunteer.store');
 Route::get('/request-volunteer', [App\Http\Controllers\GuestController::class, 'create_request'])->name('request_volunteer.create');
+// Google Auth
+Route::get('redirect', [App\Http\Controllers\SocialController::class, 'redirect']);
+Route::get('callback/google', [App\Http\Controllers\SocialController::class, 'callback']);

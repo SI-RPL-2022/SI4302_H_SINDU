@@ -1,3 +1,17 @@
+body {
+    font-family: "Poppins";
+}
 .title-container {
     background-image: url('/img/title-bg.png');
+}
+
+.auth-img {
+    width: 100%;
+    height: 45vw;
+    object-fit: cover;
+}
+
+.h3-sindu {
+    font-family: "Poppins";
+    font-weight: 600;
 }
