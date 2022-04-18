@@ -61,9 +61,9 @@
                             </button>
                         </div>
                         <div class="col-md-6 d-grid">
-                            <button type="submit" class="btn btn-light text-sindu"><i class="fa-brands fa-google"></i>
+                            <a class="btn btn-light text-sindu" href="/redirect"><i class="fa-brands fa-google"></i>
                                 {{ __('Masuk dengan Google') }}
-                            </button>
+                            </a>
                         </div>
                         @if (Route::has('password.request'))
                             <a class="btn btn-link text-light" href="{{ route('password.request') }}">
