@@ -17,7 +17,6 @@ class CreateTestimoniTable extends Migration
             $table->id('id_testimoni');
             $table->bigInteger('id_users')->unsigned();
             $table->foreign('id_users')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('nama');
             $table->string('deskripsi_testimoni'); 
             $table->timestamps();
         });
