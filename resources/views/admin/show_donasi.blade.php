@@ -16,10 +16,16 @@
         @endif 
         <div class="card">
             <div class="card-header">
-                <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-primary">Cari</button>
-                </div>
+                <form action="{{ route('admin.cari.donasi') }}"  method="get">
+                    <div class="input-group input-group-sm" style="width: 160px;">
+                        <input type="text" name="cari" class="form-control float-right" placeholder="Cari">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form> 
             </div>
             <div class="card-body table-responsive" >
                 <table class="table table-hover table-head-fixed ">
@@ -42,9 +48,16 @@
                             <td>{{ $datas->email_donatur }}</td>
                             <td>{{ $datas->total_donasi }}</td>
                             <td>{{ $datas->deskripsi_donasi }}</td>
-                            <td>{{ $datas->bukti_transfer }}</td>
                             <td>
+                                <a href="{{asset ('image/donasi/' . $datas->bukti_transfer)}}" target="_black" rel="noopener noreferer">Lihat Gambar</a>
+                            </td>
+                            <td>
+                            @if($datas->status =='pending')         
                                 <button type="button" class="btn btn-warning btn-sm text-white">Terima</button>
+                            @else
+                                <button type="button" class="btn btn-warning btn-sm" disabled>Terima</button>   
+                            @endif
+                                
                                 <a type="button" class="btn btn-danger btn-sm" href="{{ url('/admin/donasi/delete/'.$datas->id_donasi) }}">Hapus</a>
                             </td>
                         </tr>
