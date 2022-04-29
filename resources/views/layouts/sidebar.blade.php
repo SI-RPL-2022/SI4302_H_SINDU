@@ -90,7 +90,8 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('admin.show.donasi') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.donasi' ||
+                request()->route()->getName() === 'admin.cari.donasi' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-donate"></i>                
                 <p>Donasi</p>
               </a>

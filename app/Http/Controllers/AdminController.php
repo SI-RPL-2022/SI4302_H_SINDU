@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Testimoni;
+use App\Models\Donasi;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
@@ -96,6 +97,22 @@ class AdminController extends Controller
                 ->get();
 
         return view('admin.show_testimoni', compact('data'));
+    }
+
+    public function showDonasi(){
+        $data = DB::table('donasi')                
+                ->select('donasi.id_donasi', 'donasi.nama_donatur', 'donasi.email_donatur', 'donasi.total_donasi','donasi.deskripsi_donasi', 'donasi.bukti_transfer' , 'donasi.created_at')
+                ->orderBy('donasi.created_at', 'DESC')
+                ->paginate(10);
+        
+        return view('admin.show_donasi', compact('data'));
+    }
+
+    public function deleteDonasi($id)
+    {
+        DB::table('donasi')->where('id_donasi', $id)->delete();        
+
+        return redirect(route('admin.show.donasi'))->with('success', 'Data Berhasil Dihapus');
     }
 }
 
