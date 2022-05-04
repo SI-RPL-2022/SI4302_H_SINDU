@@ -31,6 +31,7 @@ Route::post('/admin/testimoni/store', [App\Http\Controllers\AdminController::cla
 Route::post('/admin/testimoni/update/{id}', [App\Http\Controllers\AdminController::class, 'updateTestimoni'])->middleware('admin_level');
 Route::get('/admin/testimoni/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteTestimoni'])->middleware('admin_level');
 Route::get('/admin/testimoni/cari', [App\Http\Controllers\AdminController::class, 'cariTestimoni'])->name('admin.cari.testimoni')->middleware('admin_level');
+Route::get('/admin/verifikasi-materi', [App\Http\Controllers\AdminController::class, 'showVerifikasiMateri'])->name('admin.show.verifikasi.materi')->middleware('admin_level'); 
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');

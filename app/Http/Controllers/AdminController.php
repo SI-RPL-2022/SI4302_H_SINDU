@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Testimoni;
+use App\Models\Materi;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
@@ -97,5 +98,21 @@ class AdminController extends Controller
 
         return view('admin.show_testimoni', compact('data'));
     }
+
+    public function showVerifikasiMateri()
+    {        
+        $data = DB::table('materi')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')
+                ->join('users', 'users.id', '=', 'materi.id_users')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'materi.created_at',
+                        'materi.status', 'materi.id_materi', 'materi.slug', 'materi.cover_materi',
+                        'materi.deskripsi_materi', 'materi.video_materi', 'users.name')
+                ->where('users.level', '=', 'relawan')
+                ->orderBy('materi.created_at', 'DESC')
+                ->get();
+
+        return view('admin.show_verifikasi_materi', compact('data'));
+    }
+
 }
 

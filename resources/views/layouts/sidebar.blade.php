@@ -84,9 +84,10 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('admin.show.verifikasi.materi') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.verifikasi.materi' || 
+                request()->route()->getName() === 'admin.cari.verifikasi.materi' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-book-open"></i>                
-                <p>Materi</p>
+                <p>Verifikasi Materi</p>
               </a>
             </li> 
             <li class="nav-item">
