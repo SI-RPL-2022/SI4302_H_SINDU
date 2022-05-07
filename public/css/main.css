@@ -3,6 +3,8 @@ body {
 }
 .title-container {
     background-image: url('/img/title-bg.png');
+    background-size: cover;
+    height: 40em;
 }
 
 .auth-img {
@@ -14,4 +16,12 @@ body {
 .h3-sindu {
     font-family: "Poppins";
     font-weight: 600;
+}
+
+.bg-sindu {
+    background-color: #297BBF;
+}
+
+#belajar-container {
+    padding: 3em 12em 3em 12em;
 }

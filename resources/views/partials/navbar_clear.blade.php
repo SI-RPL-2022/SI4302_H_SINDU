@@ -1,4 +1,4 @@
-<nav id="navbar" class="navbar navbar-expand-md py-1 sticky-top gradient-y">
+<nav id="navbar" class="navbar navbar-expand-md py-1 fixed-top gradient-y">
     <div class="container align-items-center">
         <a id="navbar-brand" class="align-items-center navbar-brand d-flex" href="{{ url('/') }}">
             <h3 class="text-light text-shadow">Sin</h3><h3 class="text-shadow">du</h3>
@@ -18,26 +18,26 @@
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item">
+                    <li class="nav-item mx-2">
                         <a class="nav-link text-light" href="{{ route('landing.page') }}">{{ __('Beranda') }}</a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('donasi') }}">{{ __('Donasi') }}</a>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-light" href="{{ route('donasi.create') }}">{{ __('Donasi') }}</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item mx-2">
                         <a class="nav-link" href="{{ route('about') }}">{{ __('Tentang Kami') }}</a>
                     </li> --}}
                     @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a id="login-btn" class="btn text-light bg-sindu"
+                        <li class="nav-item mx-2">
+                            <a id="login-btn" class="btn text-light" style="background-color: #297BBF; font-weight: 600;"
                                 href="{{ route('login') }}">{{ __('Masuk') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                        {{-- <li class="nav-item mx-2">
+                            <a id="reg-btn" class="btn text-light bg-sindu" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li> --}}
                     @endif
                 @else
                     <li class="nav-item dropdown">
@@ -77,6 +77,12 @@
         login.classList.add("bg-light");
         login.style.color = "#297BBF"
         login.style.transition = "1s" ;
+        var reg = document.getElementById("reg-btn"); 
+        reg.classList.remove("bg-sindu")
+        reg.classList.remove("text-light")
+        reg.classList.add("bg-light");
+        reg.style.color = "#297BBF"
+        reg.style.transition = "1s" ;
         document.getElementById("logo").style.fontSize = "35px";
       } else {
         document.getElementById("navbar").style.background = "linear-gradient(180deg, rgba(0,0,0,0.5046612394957983) 0%, rgba(0,0,0,0) 100%)";
@@ -84,9 +90,15 @@
         var login = document.getElementById("login-btn"); 
         login.classList.remove("bg-light")
         login.classList.remove("text-sindu")
-        login.classList.add("bg-sindu");
+        login.style.background = "#297BBF";
         login.classList.add("text-light");
         login.style.transition = "1s" ;
+        var reg = document.getElementById("reg-btn"); 
+        reg.classList.remove("bg-light")
+        reg.classList.remove("text-sindu")
+        reg.classList.add("bg-sindu");
+        reg.classList.add("text-light");
+        reg.style.transition = "1s" ;
         document.getElementById("logo").style.fontSize = "35px";
       }
     }
