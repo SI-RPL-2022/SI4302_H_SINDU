@@ -1,7 +1,7 @@
 <nav id="navbar" class="navbar navbar-expand-md py-1 fixed-top gradient-y">
     <div class="container align-items-center">
         <a id="navbar-brand" class="align-items-center navbar-brand d-flex" href="{{ url('/') }}">
-            <h3 class="text-light text-shadow">Sin</h3><h3 class="text-shadow">du</h3>
+            <h3 class="text-light text-shadow">Sin</h3><h3 id="du" class="text-shadow">du</h3>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -70,36 +70,36 @@
     function scrollFunction() {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         document.getElementById("navbar").style.background = "#297BBF";
+        document.getElementById("navbar").style.boxShadow = "0 -2em 4em black";
         document.getElementById("navbar").style.transition = "1s";
+        document.getElementById("du").classList.add = "text-light";
         var login = document.getElementById("login-btn"); 
-        login.classList.remove("bg-sindu")
-        login.classList.remove("text-light")
+        login.classList.remove("bg-sindu", "text-light");
         login.classList.add("bg-light");
-        login.style.color = "#297BBF"
+        login.style.color = "#297BBF";
         login.style.transition = "1s" ;
         var reg = document.getElementById("reg-btn"); 
-        reg.classList.remove("bg-sindu")
-        reg.classList.remove("text-light")
-        reg.classList.add("bg-light");
-        reg.style.color = "#297BBF"
+        reg.classList.remove("bg-sindu", "text-light"),
+        reg.classList.add("bg-light"),
+        reg.style.color = "#297BBF";
         reg.style.transition = "1s" ;
-        document.getElementById("logo").style.fontSize = "35px";
       } else {
         document.getElementById("navbar").style.background = "linear-gradient(180deg, rgba(0,0,0,0.5046612394957983) 0%, rgba(0,0,0,0) 100%)";
+        document.getElementById("navbar").style.boxShadow = "none";
         document.getElementById("navbar").style.transition = "1s";
+        document.getElementById("du").classList.add = "text-sindu";
         var login = document.getElementById("login-btn"); 
-        login.classList.remove("bg-light")
-        login.classList.remove("text-sindu")
+        login.classList.remove("bg-light", "text-sindu");
         login.style.background = "#297BBF";
         login.classList.add("text-light");
         login.style.transition = "1s" ;
         var reg = document.getElementById("reg-btn"); 
-        reg.classList.remove("bg-light")
-        reg.classList.remove("text-sindu")
-        reg.classList.add("bg-sindu");
-        reg.classList.add("text-light");
+        reg.classList.remove("bg-light", "text-sindu");
+        reg.classList.add("bg-sindu", "text-light");
         reg.style.transition = "1s" ;
-        document.getElementById("logo").style.fontSize = "35px";
+        var nav = document.getElementById('navbar');
+        nav.classList.remove("shadow");
+        nav.style.transition = "1s";
       }
     }
     </script>
