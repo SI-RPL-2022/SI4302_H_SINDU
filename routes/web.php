@@ -34,6 +34,7 @@ Route::get('/admin/testimoni/cari', [App\Http\Controllers\AdminController::class
 Route::get('/admin/donasi', [App\Http\Controllers\AdminController::class, 'showDonasi'])->name('admin.show.donasi')->middleware('admin_level'); 
 Route::get('/admin/donasi/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteDonasi'])->middleware('admin_level');
 Route::get('/admin/donasi/cari', [App\Http\Controllers\AdminController::class, 'cariDonasi'])->name('admin.cari.donasi')->middleware('admin_level');
+Route::get('/admin/donasi/status/{id}', [App\Http\Controllers\AdminController::class, 'statusDonasi'])->middleware('admin_level');
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');

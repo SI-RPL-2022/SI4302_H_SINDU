@@ -300,7 +300,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader">Terima kasih, donasi Anda sudah tercatat!</span>
+    <span class="preheader">Terima kasih, donasi Anda sudah kami terima!</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -315,7 +315,7 @@
                     <tr>
                       <td>
                         <p>Halo!</p>
-                        <p>Donasi Anda telah tercatat didalam database kami.</p>
+                        <p>Donasi Anda telah terkonfirmasi dan dana telah Anda kami terima.</p>
                         <p>Terimakasih banyak sudah berbagi bersama kami.</p>
                       
                         <br>

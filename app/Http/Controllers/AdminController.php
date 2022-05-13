@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DonasiConfirmed;
 use App\Models\Testimoni;
 use App\Models\Donasi;
 use Illuminate\Support\Facades\DB;
@@ -123,6 +125,21 @@ class AdminController extends Controller
                 ->paginate(10);
 
         return view('admin.show_donasi', compact('data'));
+    }
+
+    public function statusDonasi($id){
+        $data = \DB::table('donasi')->where('id_donasi', $id)->first();
+
+        $status_sekarang = $data->status;
+
+        if($status_sekarang=='pending'){
+            \DB::table('donasi')->where('id_donasi',$id)->update([
+                'status'=>'confirmed'
+            ]);
+        }
+
+        \Mail::to($data->email_donatur)->send(new DonasiConfirmed($data));
+        return redirect('admin/donasi');
     }
 }
 

@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-header">
                 <form action="{{ route('admin.cari.donasi') }}"  method="get">
-                    <div class="input-group input-group-sm" style="width: 160px;">
+                    <div class="input-group input-group-sm" style="width: 500px;">
                         <input type="text" name="cari" class="form-control float-right" placeholder="Cari">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
@@ -52,10 +52,10 @@
                                 <a href="{{asset ('image/donasi/' . $datas->bukti_transfer)}}" target="_black" rel="noopener noreferer">Lihat Gambar</a>
                             </td>
                             <td>
-                            @if($datas->status =='pending')         
-                                <button type="button" class="btn btn-warning btn-sm text-white">Terima</button>
+                            @if($datas->status =='pending')
+                                <a href="{{url ('admin/donasi/status/'. $datas->id_donasi)}}" class="btn btn-warning btn-sm text-white">Terima</a>         
                             @else
-                                <button type="button" class="btn btn-warning btn-sm" disabled>Terima</button>   
+                                <button type="button" class="btn btn-secondary btn-sm" disabled>Diterima</button>   
                             @endif
                                 
                                 <a type="button" class="btn btn-danger btn-sm" href="{{ url('/admin/donasi/delete/'.$datas->id_donasi) }}">Hapus</a>
