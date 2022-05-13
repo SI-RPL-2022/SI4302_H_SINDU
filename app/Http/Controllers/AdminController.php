@@ -114,5 +114,32 @@ class AdminController extends Controller
         return view('admin.show_verifikasi_materi', compact('data'));
     }
 
+    public function verifikasiRilisMateri(Request $request, $id)
+    {
+        $data = Materi::find($id);                    
+
+        $validate = $request->validate([                      
+            'status' => 'required'                                  
+        ]);
+
+        $data->status = $request->status;                      
+        $data->save();
+        
+        return redirect(route('admin.show.verifikasi.materi'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function verifikasiTolakMateri(Request $request, $id)
+    {
+        $data = Materi::find($id);                    
+
+        $validate = $request->validate([                      
+            'status' => 'required'                                  
+        ]);
+
+        $data->status = $request->status;                      
+        $data->save();
+        
+        return redirect(route('admin.show.verifikasi.materi'))->with('success', 'Data Berhasil Diubah');
+    }
 }
 

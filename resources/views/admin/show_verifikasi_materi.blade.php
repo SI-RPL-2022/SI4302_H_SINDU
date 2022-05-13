@@ -55,7 +55,16 @@
                                 @if($datas->status == "Rilis")
                                     <span class="badge bg-success">{{ $datas->status }}</span>                                    
                                 @elseif($datas->status == "Menunggu")              
-                                    <span class="badge bg-warning">{{ $datas->status }}</span>                                    
+                                    <form action="{{ url('/admin/verifikasi-materi/rilis-materi/'.$datas->id_materi) }}" method="post">
+                                        @csrf
+                                        <input type="text" name="status" value="Rilis" hidden>
+                                        <button type="submit" class="btn btn-sm btn-warning mb-1">Terima</a> 
+                                    </form>                      
+                                    <form action="{{ url('/admin/verifikasi-materi/tolak-materi/'.$datas->id_materi) }}" method="post">
+                                        @csrf
+                                        <input type="text" name="status" value="Ditolak" hidden>
+                                        <button type="submit" class="btn btn-sm btn-danger">Tolak</a> 
+                                    </form>                                     
                                 @elseif($datas->status == "Ditolak")
                                     <span class="badge bg-danger">{{ $datas->status }}</span>
                                 @endif
