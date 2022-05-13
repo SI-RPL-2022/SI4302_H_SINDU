@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}">
   <script src="https://kit.fontawesome.com/f1223f01a6.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ asset('css/overlayScrollbars/OverlayScrollbars.min.css') }}">    
-        
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">  
@@ -90,7 +89,8 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('admin.show.donasi') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.donasi' ||
+                request()->route()->getName() === 'admin.cari.donasi' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-donate"></i>                
                 <p>Donasi</p>
               </a>
