@@ -1,6 +1,8 @@
 body {
     font-family: "Poppins";
+    font-weight: 300;
 }
+
 .title-container {
     background-image: url('/img/title-bg.png');
     background-size: cover;
@@ -22,6 +24,55 @@ body {
     background-color: #297BBF;
 }
 
+.text-sindu-blue {
+    color: #297BBF;
+}
+
 #belajar-container {
     padding: 3em 12em 3em 12em;
+}
+
+.slick-initialized .slick-track {
+    display: flex !important;
+}
+
+.slick-initialized .slick-track .slick-slide {
+    display: flex !important;
+    flex-wrap: wrap;
+    height: auto !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+}
+
+/* .slick-slide .row {
+    display: block;
+}
+.slick-slide .col {
+    display: float;
+} */
+
+.slide_elem .img_cont {
+    position: relative;
+    height: 230px;
+    margin-bottom: 14px;
+    background: #f5f5f5;
+    display: flex;
+    border: 1px solid #000;
+    }
+
+.slick-slide .img-fluid {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.slick-slide .deskripsi-testimoni {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+@media (max-width: 767.98px) {
+    .responsive-container {
+        text-align: center;
+    }
 }

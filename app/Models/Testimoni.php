@@ -13,7 +13,9 @@ class Testimoni extends Model
     protected $fillable = [
         'id_testimoni',
         'id_users',
-        'nama',            
+        'nama',
+        'role',
+        'foto',
         'deskripsi_testimoni'       
     ];   
 }
