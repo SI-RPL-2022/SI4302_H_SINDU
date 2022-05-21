@@ -16,16 +16,35 @@
         @endif 
         <div class="card">
             <div class="card-header">
-                <form action="{{ route('admin.cari.donasi') }}"  method="get">
-                    <div class="input-group input-group-sm" style="width: 500px;">
-                        <input type="text" name="cari" class="form-control float-right" placeholder="Cari">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                <div class="row">
+                    <div class="col">
+                        <form action="{{ route('admin.cari.donasi') }}"  method="get">
+                            <div class="input-group input-group-sm" style="width: 500px;">
+                                <input type="text" name="cari" class="form-control float-right" placeholder="Cari">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form> 
+                    <div class="col ">
+                        <?php
+                            $total = 0;
+                            foreach($data as $key => $datas){
+                                if ($datas->status == "confirmed"){
+                                    $total += $datas->total_donasi;
+                                }
+                            }
+                            
+                        ?>
+                        <div style="margin-left:200px;">
+                            <h4>Total Donasi: {{$total}}</h4>
+                        </div>
+                        
+                    </div>
+                </div>                 
             </div>
             <div class="card-body table-responsive" >
                 <table class="table table-hover table-head-fixed ">
@@ -34,13 +53,13 @@
                             <th>No</th>
                             <th>Nama Lengkap</th>                            
                             <th>Email</th>                            
-                            <th>No. Hp</th>
+                            <th>Total Donasi</th>
                             <th>Deskripsi</th>
                             <th>Bukti Transfer</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>                        
                         @foreach($data as $key => $datas)
                         <tr>
                             <td>{{ $data-> firstItem()+ $key }}</td>
