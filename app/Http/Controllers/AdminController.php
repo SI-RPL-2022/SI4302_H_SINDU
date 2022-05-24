@@ -141,5 +141,12 @@ class AdminController extends Controller
         
         return redirect(route('admin.show.verifikasi.materi'))->with('success', 'Data Berhasil Diubah');
     }
+
+    public function deleteVerifikasiMateri($id)
+    {
+        DB::table('materi')->where('id_materi', $id)->delete();        
+
+        return redirect(route('admin.show.verifikasi.materi'))->with('success', 'Data Berhasil Dihapus');
+    }
 }
 

@@ -90,7 +90,7 @@
                                         </div>                                        
                                     </div>                                
                                 </div>                                                                                                        
-                                <a href="#" class="btn btn-sm btn-square btn-danger mb-1"><i class="fas fa-trash"></i></a>
+                                <a href="{{ url('/admin/verifikasi-materi/delete/'.$datas->id_materi) }}" class="btn btn-sm btn-square btn-danger mb-1"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>                            
                         @endforeach                                
