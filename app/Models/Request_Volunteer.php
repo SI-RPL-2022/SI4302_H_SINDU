@@ -9,5 +9,13 @@ class Request_Volunteer extends Model
 {
     use HasFactory;
     protected $table = 'request_volunteer';
-    protected $primaryKey = 'id_req_volunteer'; 
+    public $primaryKey = 'id_req_volunteer'; 
+    protected $fillable = [
+        'id_req_volunteer',
+        'nama_lengkap',
+        'email',
+        'no_hp',
+        'deskripsi',
+        'berkas'    
+    ];   
 }

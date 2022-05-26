@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Mata_Pelajaran;
 use App\Models\Materi;
+use App\Models\Request_Volunteer;
+use App\Models\Detail_Pengajuan_Relawan;
 use Auth;
 
 class RelawanController extends Controller
@@ -159,4 +161,33 @@ class RelawanController extends Controller
 
         return view('relawan.show_materi', compact('data'));
     }
+    public function showRequest()
+    {
+        $data = DB::table('request_volunteer')                
+                ->select('id_req_volunteer','nama_lengkap','email','no_hp','deskripsi','berkas')
+                ->get();
+        return view('relawan.pendaftaran_relawan', compact('data'));
+        }
+    
+        public function create_request_pendaftaran_relawan()
+        {
+            $model = new Detail_Pengajuan_Relawan();
+            return view('relawan.pendaftaran_relawan', compact(
+                'model'
+            ));
+        }
+        public function store_pendaftaran_relawan(Request $request)
+        {
+        $model = new Detail_Pengajuan_Relawan();
+        $model->id_pengajuan_relawan = $request->id_pengajuan_relawan;
+        $model->nama_relawan = $request->nama_relawan;
+        $model->email_relawan = $request->email_relawan;
+        $model->nik = $request->nik;
+        $model->berkas_ktp = $request->berkas_ktp;
+        $model->berkas_cv = $request->berkas_cv;
+        $model->save();
+        
+        return redirect('/relawan/mendaftar')->with('success', 'Data Berhasil Tersimpan!');
+    }
+
 }
