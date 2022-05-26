@@ -35,6 +35,7 @@ Route::get('/admin/verifikasi-materi', [App\Http\Controllers\AdminController::cl
 Route::post('/admin/verifikasi-materi/rilis-materi/{id}', [App\Http\Controllers\AdminController::class, 'verifikasiRilisMateri'])->name('admin.verifikasi.rilis.materi')->middleware('admin_level'); 
 Route::post('/admin/verifikasi-materi/tolak-materi/{id}', [App\Http\Controllers\AdminController::class, 'verifikasiTolakMateri'])->name('admin.verifikasi.tolak.materi')->middleware('admin_level'); 
 Route::get('/admin/verifikasi-materi/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteVerifikasiMateri'])->middleware('admin_level');
+Route::get('/admin/verifikasi-materi/cari', [App\Http\Controllers\AdminController::class, 'cariVerifikasiMateri'])->name('admin.cari.verifikasi.materi')->middleware('admin_level');
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');

@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-header">                
                 <div class="card-tools mt-1">
-                    <form action="#"  method="get">
+                    <form action="{{ route('admin.cari.verifikasi.materi') }}"  method="get">
                         <div class="input-group input-group-sm" style="width: 160px;">
                             <input type="text" name="cari" class="form-control float-right" placeholder="Cari">
                             <div class="input-group-append">
@@ -82,7 +82,18 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">                                                
+                                            <div class="modal-body">     
+                                                <h3 class="text-center">{{ $datas->judul_materi }}</h3>
+                                                <img src="{{ asset('image/cover/'.$datas->cover_materi) }}" class="img-fluid rounded" alt="">
+                                                <div class="mt-2 deskripsi-materi" align="justify">                                                        
+                                                    {!! $datas->deskripsi_materi !!}
+                                                </div>
+                                                <div class="mt-1">
+                                                    <p>
+                                                    Berikut Link Video Materi: <br>
+                                                    <a href="{{ $datas->video_materi }}">{{ $datas->video_materi }}</a>
+                                                    </p>
+                                                </div>                                           
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Tutup</button>                                                

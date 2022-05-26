@@ -148,5 +148,21 @@ class AdminController extends Controller
 
         return redirect(route('admin.show.verifikasi.materi'))->with('success', 'Data Berhasil Dihapus');
     }
-}
 
+    public function cariVerifikasiMateri(Request $request)
+    {        
+        $keyword = $request->cari;
+        $data = DB::table('materi')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')
+                ->join('users', 'users.id', '=', 'materi.id_users')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'materi.created_at',
+                        'materi.status', 'materi.id_materi', 'materi.slug', 'materi.cover_materi',
+                        'materi.deskripsi_materi', 'materi.video_materi', 'users.name')
+                ->where('users.level', '=', 'relawan')
+                ->where('materi.judul_materi', 'like', "%". $keyword . "%")
+                ->orderBy('materi.created_at', 'DESC')
+                ->get();
+
+        return view('admin.show_verifikasi_materi', compact('data'));
+    }
+}
