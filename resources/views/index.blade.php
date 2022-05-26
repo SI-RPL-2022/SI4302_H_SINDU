@@ -102,8 +102,8 @@
 <script>
     $('.multiple-items').slick({
         infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 1,
+        slidesToShow: {{ $slidesToShow }},
+        slidesToScroll: {{ $slidesToScroll }},
         autoplay: true,
         prevArrow: $(".pp2"),
         nextArrow: $(".nn2"),

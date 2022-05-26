@@ -15,7 +15,9 @@ class WebController extends Controller
     public function index()
     {
         $testimoni = Testimoni::orderby('updated_at', 'DESC')->get();
-        return view('index', compact('testimoni'));
+        $slidesToShow = intval(floor(($testimoni->count())/2));
+        $slidesToScroll = intval($slidesToShow/2);
+        return view('index', compact('testimoni', 'slidesToShow', 'slidesToScroll'));
     }
     /**
      * Store a newly created resource in storage.
