@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Request_Volunteer;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\PengajuanProcessed;
+use App\Mail\PengajuanRelawanProcessed;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -51,7 +51,7 @@ class GuestController extends Controller
         $model->berkas = $request->file('berkas')->store('berkas');
         $model->save(); 
         
-        \Mail::to($model->email)->send(new PengajuanProcessed($model));
+        \Mail::to($model->email)->send(new PengajuanRelawanProcessed($model));
 
         return redirect('/request-volunteer')->with('success', 'Data Berhasil Tersimpan!');
     }

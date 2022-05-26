@@ -9,5 +9,5 @@ class Request_Volunteer extends Model
 {
     use HasFactory;
     protected $table = 'pengajuan_relawan';
-    protected $primaryKey = 'id_req_volunteer'; 
+    protected $primaryKey = 'id_pengajuan_relawan'; 
 }

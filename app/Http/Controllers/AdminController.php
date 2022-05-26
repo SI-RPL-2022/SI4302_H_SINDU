@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DonasiConfirmed;
+use App\Mail\PengajuanRelawanAccepted;
 use App\Models\Testimoni;
 use App\Models\Materi;
 use App\Models\Request_Volunteer;
@@ -234,5 +235,53 @@ class AdminController extends Controller
         $data = Request_Volunteer::all();
 
         return view('admin.show_verifikasi_pengajuan_relawan', compact('data'));
+    }
+
+    public function cariVerifikasiPengajuan(Request $request)
+    {        
+        $keyword = $request->cari;
+        $data = DB::table('pengajuan_relawan')
+                ->where('nama_organisasi', 'like', "%". $keyword . "%")
+                ->orderBy('created_at', 'DESC')
+                ->get();
+
+        return view('admin.show_verifikasi_pengajuan_relawan', compact('data'));
+    }
+
+    public function verifikasiTerimaPengajuan(Request $request, $id)
+    {
+        $data = Request_Volunteer::find($id);                    
+
+        $validate = $request->validate([                      
+            'status' => 'required'                                  
+        ]);
+
+        $data->status = $request->status;                      
+        $data->save();
+
+        \Mail::to($data->email)->send(new PengajuanRelawanAccepted($data));
+        
+        return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function verifikasiTolakPengajuan(Request $request, $id)
+    {
+        $data = Request_Volunteer::find($id);                    
+
+        $validate = $request->validate([                      
+            'status' => 'required'                                  
+        ]);
+
+        $data->status = $request->status;                      
+        $data->save();
+        
+        return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteVerifikasiPengajuan($id)
+    {
+        DB::table('pengajuan_relawan')->where('id_pengajuan_relawan', $id)->delete();        
+
+        return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Dihapus');
     }
 }

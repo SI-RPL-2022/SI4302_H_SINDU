@@ -1,8 +1,8 @@
 @extends('layouts.sidebar')
 
-@section('title', 'Verifikasi Materi')
+@section('title', 'Verifikasi Pengajuan Relawan')
 
-@section('title-page', 'Verifikasi Materi')
+@section('title-page', 'Verifikasi Pengajuan Relawan')
 
 @section('content')
 <div class="row justify-content-center">        
@@ -49,57 +49,29 @@
                             <td>{{ $datas->nama_organisasi }}</td>
                             <td>{{ $datas->nama_lengkap }}</td>
                             <td>{{ $datas->startDate }} - {{ $datas->endDate }}</td>
-                            <td>
+                            <td class="d-flex">
                                 @if($datas->status == "Diterima")
-                                    <span class="badge bg-success">{{ $datas->status }}</span>                                    
+                                    <span class="badge bg-success my-2">{{ $datas->status }}</span>                                    
                                 @elseif($datas->status == "Diproses")              
-                                    <form action="{{ url('/admin/verifikasi-materi/rilis-materi/'.$datas->id_materi) }}" method="post">
+                                    <form action="{{ url('/admin/pengajuan-relawan/terima-pengajuan/'.$datas->id_pengajuan_relawan) }}" method="post">
                                         @csrf
-                                        <input type="text" name="status" value="Rilis" hidden>
-                                        <button type="submit" class="btn btn-sm btn-warning mb-1">Terima</a> 
+                                        <input type="text" name="status" value="Diterima" hidden>
+                                        <button type="submit" class="btn btn-sm btn-warning mb-1 mx-1">Terima</a> 
                                     </form>                      
-                                    <form action="{{ url('/admin/verifikasi-materi/tolak-materi/'.$datas->id_materi) }}" method="post">
+                                    <form action="{{ url('/admin/pengajuan-relawan/tolak-pengajuan/'.$datas->id_pengajuan_relawan) }}" method="post">
                                         @csrf
                                         <input type="text" name="status" value="Ditolak" hidden>
-                                        <button type="submit" class="btn btn-sm btn-danger">Tolak</a> 
+                                        <button type="submit" class="btn btn-sm btn-danger mb-1 mx-1">Tolak</a> 
                                     </form>                                     
                                 @elseif($datas->status == "Ditolak")
-                                    <span class="badge bg-danger">{{ $datas->status }}</span>
+                                    <span class="badge bg-danger my-2">{{ $datas->status }}</span>
                                 @endif
                             </td>
                             <td class="text-nowrap">          
-                                <button type="button" class="btn btn-sm btn-secondary mb-1" data-toggle="modal" data-target="#showDetailMateri_{{ $datas->slug }}">
+                                <button type="button" class="btn btn-sm btn-secondary mb-1" data-toggle="modal" data-target="">
                                     <i class="fas fa-eye"></i>
-                                </button> 
-                                <div class="modal fade" id="showDetailMateri_{{ $datas->slug }}">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Detail Materi</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">     
-                                                <h3 class="text-center">{{ $datas->judul_materi }}</h3>
-                                                <img src="{{ asset('image/cover/'.$datas->cover_materi) }}" class="img-fluid rounded" alt="">
-                                                <div class="mt-2 deskripsi-materi" align="justify">                                                        
-                                                    {!! $datas->deskripsi_materi !!}
-                                                </div>
-                                                <div class="mt-1">
-                                                    <p>
-                                                    Berikut Link Video Materi: <br>
-                                                    <a href="{{ $datas->video_materi }}">{{ $datas->video_materi }}</a>
-                                                    </p>
-                                                </div>                                           
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Tutup</button>                                                
-                                            </div>
-                                        </div>                                        
-                                    </div>                                
-                                </div>                                                                                                        
-                                <a href="{{ url('/admin/verifikasi-materi/delete/'.$datas->id_materi) }}" class="btn btn-sm btn-square btn-danger mb-1"><i class="fas fa-trash"></i></a>
+                                </button>                                                                                            
+                                <a href="{{ url('/admin/pengajuan-relawan/delete/'.$datas->id_pengajuan_relawan) }}" class="btn btn-sm btn-square btn-danger mb-1"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>                            
                         @endforeach                                
