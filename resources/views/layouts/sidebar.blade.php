@@ -4,11 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SinDu | @yield('title')</title>  
-  <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">          
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">    
   <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}">
   <script src="https://kit.fontawesome.com/f1223f01a6.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ asset('css/overlayScrollbars/OverlayScrollbars.min.css') }}">    
+  <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>dw
+  <link rel="stylesheet" href="{{ asset('css/overlayScrollbars/OverlayScrollbars.min.css') }}">   
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">  
+  <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">          
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">  
@@ -20,7 +24,7 @@
       </ul>      
       <ul class="navbar-nav ml-auto">                        
         <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <a class="nav-link" href="/">
             SinDu
           </a>
         </li>
@@ -149,6 +153,10 @@
 <script src="{{ asset('/js/bs-custom-file-input.min.js') }}"></script>
 @yield('add_ck-editor')
 @yield('input-file')
+<script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.0.js" integrity="sha256-0Nkb10Hnhm4EJZ0QDpvInc3bRp77wQIbIQmWYH3Y7Vw=" crossorigin="anonymous"></script>
+</script>
 </body>
 
 </html>

@@ -32,7 +32,7 @@
     </style>
 <body>
     <footer class="footer">
-        <div class="footer-content text-white pt-5 pb-5" style="background-color:#297BBF">
+        <div class="footer-content text-white pt-5 pb-5" style="background-color:#297BBF; border-radius: 1em 1em 0 0;">
             <div class="row ms-5">
                 <div class="footer-col col-6 mt-2">
                     <p class="me-5 pe-5"><strong>Sindu</strong> merupakan platform fasilitator antara relawan dengan organisasi/komunitas sosial dibidang pendidikan.</p>

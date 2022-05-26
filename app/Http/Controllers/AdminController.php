@@ -37,7 +37,7 @@ class AdminController extends Controller
     {
         $data = DB::table('testimoni')                
                 ->join('users', 'users.id', '=', 'testimoni.id_users')
-                ->select('testimoni.id_testimoni', 'testimoni.id_users', 'testimoni.nama','testimoni.deskripsi_testimoni', 'testimoni.created_at')
+                ->select('testimoni.id_testimoni', 'testimoni.id_users', 'testimoni.nama', 'testimoni.role', 'testimoni.foto', 'testimoni.deskripsi_testimoni', 'testimoni.created_at')
                 ->where('testimoni.id_users', Auth::user()->id)
                 ->orderBy('testimoni.created_at', 'DESC')
                 ->get();
@@ -50,13 +50,22 @@ class AdminController extends Controller
     {
         $validate = $request->validate([
             'id_users' => 'required',
-            'nama' => 'required',            
+            'nama' => 'required',
+            'role' => 'required',
+            'foto' => 'required',            
             'deskripsi_testimoni' => 'required'            
-        ]);      
-        
+        ]);
+
+        if ($foto = $request->file('foto')) {
+            $destinationPath = 'profil_testimoni';  
+            $fileSource1 = $foto->getClientOriginalName();
+            $foto->move($destinationPath, $fileSource1);
+        }
         $testimoni = Testimoni::create([
             'id_users' => $request->id_users,
-            'nama' => $request->nama,                           
+            'nama' => $request->nama,              
+            'role' => $request->role,
+            'foto' => $fileSource1,           
             'deskripsi_testimoni' => $request->deskripsi_testimoni           
         ]);           
 
@@ -69,12 +78,21 @@ class AdminController extends Controller
 
         $validate = $request->validate([
             'id_users' => 'required',
-            'nama' => 'required',            
+            'nama' => 'required',      
+            'role' => 'required',
+            'foto' => 'required',
             'deskripsi_testimoni' => 'required'                                  
         ]);
+        if ($foto = $request->file('foto')) {
+            $destinationPath = 'profil_testimoni';  
+            $fileSource1 = $foto->getClientOriginalName();
+            $foto->move($destinationPath, $fileSource1);
+        }
 
         $data->id_users = $request->id_users;
         $data->nama = $request->nama;        
+        $data->role = $request->role;        
+        $data->foto = $fileSource1;        
         $data->deskripsi_testimoni = $request->deskripsi_testimoni;                    
         $data->save();
         

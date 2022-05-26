@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Testimoni;
 
 class WebController extends Controller
 {
@@ -13,9 +14,11 @@ class WebController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $testimoni = Testimoni::orderby('updated_at', 'DESC')->get();
+        $slidesToShow = intval(floor(($testimoni->count())/2));
+        $slidesToScroll = intval($slidesToShow/2);
+        return view('index', compact('testimoni', 'slidesToShow', 'slidesToScroll'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
