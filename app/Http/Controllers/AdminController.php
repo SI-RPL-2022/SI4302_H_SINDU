@@ -142,7 +142,6 @@ class AdminController extends Controller
         \Mail::to($data->email_donatur)->send(new DonasiConfirmed($data));
         return redirect('admin/donasi');
     }
-}
 
     public function showVerifikasiMateri()
     {        
