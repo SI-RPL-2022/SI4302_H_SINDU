@@ -300,7 +300,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader">Terima kasih, donasi Anda sudah kami terima!</span>
+    <span class="preheader">Terima kasih, mohon ajukan kembali dengan persyaratan yang memadai!</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DonasiConfirmed;
 use App\Mail\PengajuanRelawanAccepted;
+use App\Mail\PengajuanRelawanDenied;
 use App\Models\Testimoni;
 use App\Models\Materi;
 use App\Models\Request_Volunteer;
@@ -274,6 +275,8 @@ class AdminController extends Controller
 
         $data->status = $request->status;                      
         $data->save();
+
+        \Mail::to($data->email)->send(new PengajuanRelawanDenied($data));
         
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
     }
