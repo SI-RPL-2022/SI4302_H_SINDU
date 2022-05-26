@@ -108,7 +108,7 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('admin.show.verifikasi.pengajuan') }}" class="nav-link">
                 <i class="nav-icon fas fa-hands-helping"></i>
                 <p>Pengajuan Relawan</p>                
               </a>

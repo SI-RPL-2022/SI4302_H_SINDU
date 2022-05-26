@@ -40,6 +40,7 @@ Route::get('/admin/donasi', [App\Http\Controllers\AdminController::class, 'showD
 Route::get('/admin/donasi/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteDonasi'])->middleware('admin_level');
 Route::get('/admin/donasi/cari', [App\Http\Controllers\AdminController::class, 'cariDonasi'])->name('admin.cari.donasi')->middleware('admin_level');
 Route::get('/admin/donasi/status/{id}', [App\Http\Controllers\AdminController::class, 'statusDonasi'])->middleware('admin_level');
+Route::get('/admin/pengajuan-relawan', [App\Http\Controllers\AdminController::class, 'showVerifikasiPengajuan'])->name('admin.show.verifikasi.pengajuan')->middleware('admin_level');
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\DonasiConfirmed;
 use App\Models\Testimoni;
 use App\Models\Materi;
+use App\Models\Request_Volunteer;
 use App\Models\Donasi;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -226,5 +227,12 @@ class AdminController extends Controller
                 ->get();
 
         return view('admin.show_verifikasi_materi', compact('data'));
+    }
+
+    public function showVerifikasiPengajuan()
+    {        
+        $data = Request_Volunteer::all();
+
+        return view('admin.show_verifikasi_pengajuan_relawan', compact('data'));
     }
 }

@@ -15,11 +15,15 @@ class CreatePengajuanRelawanTable extends Migration
     {
         Schema::create('pengajuan_relawan', function (Blueprint $table) {
             $table->id('id_pengajuan_relawan');
-            $table->bigInteger('id_users')->unsigned();
-            $table->foreign('id_users')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('nama_organisasi'); 
-            $table->string('pengaju'); 
-            $table->string('status'); 
+            $table->string('nama_lengkap'); 
+            $table->string('nama_organisasi');
+            $table->string('email'); 
+            $table->string('no_hp', 13); 
+            $table->date('startDate'); 
+            $table->date('endDate'); 
+            $table->string('deskripsi'); 
+            $table->string('berkas'); 
+            $table->string('status')->default('Diproses'); 
             $table->timestamps();
         });
     }

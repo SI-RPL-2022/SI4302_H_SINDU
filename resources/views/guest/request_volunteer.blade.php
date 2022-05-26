@@ -6,11 +6,15 @@
         <div class="card rounded">
             <div class="card-body">
             <h2 style="text-align:center;">Form Mengajukan Bantuan Relawan</h2>
-            <form action="{{url('/request-volunteer')}}" class="contact100-form validate-form" method="POST">
+            <form action="{{url('/request-volunteer')}}" class="contact100-form validate-form" enctype="multipart/form-data" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                     <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required>
+                </div>
+                <div class="mb-3">
+                    <label for="nama_lengkap" class="form-label">Nama Organisasi</label>
+                    <input type="text" class="form-control" id="nama_organisasi" name="nama_organisasi" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -19,6 +23,14 @@
                 <div class="mb-3">
                     <label for="no_hp" class="form-label">No HP</label>
                     <input type="text" class="form-control" id="no_hp" name="no_hp" required>
+                </div>
+                <div class="mb-3">
+                    <label for="startDate" class="form-label">Tanggal Mulai</label>
+                    <input type="date" class="form-control" id="startDate" name="startDate" required>
+                </div>
+                <div class="mb-3">
+                    <label for="endDate" class="form-label">Tanggal Selesai</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate" required>
                 </div>
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
