@@ -19,7 +19,8 @@ class CreateDonasiTable extends Migration
             $table->string('email_donatur');            
             $table->integer('total_donasi');
             $table->longText('deskripsi_donasi');
-            $table->string('bukti_transfer'); 
+            $table->string('bukti_transfer');
+            $table->string('status'); 
             $table->timestamps();
         });
     }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DonasiConfirmed;
 use App\Models\Testimoni;
 use App\Models\Materi;
+use App\Models\Donasi;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
@@ -98,6 +101,48 @@ class AdminController extends Controller
 
         return view('admin.show_testimoni', compact('data'));
     }
+
+    public function showDonasi(){
+        $data = DB::table('donasi')                
+                ->select('donasi.id_donasi', 'donasi.nama_donatur', 'donasi.email_donatur', 'donasi.total_donasi','donasi.deskripsi_donasi', 'donasi.bukti_transfer', 'donasi.status', 'donasi.created_at')
+                ->orderBy('donasi.created_at', 'DESC')
+                ->paginate(10);
+        
+        return view('admin.show_donasi', compact('data'));
+    }
+
+    public function deleteDonasi($id)
+    {
+        DB::table('donasi')->where('id_donasi', $id)->delete();        
+
+        return redirect(route('admin.show.donasi'))->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function cariDonasi(Request $request){
+        
+        $keyword = $request->cari;
+        $data = DB::table('donasi')                        
+                ->where('donasi.nama_donatur', 'like', "%". $keyword . "%")
+                ->paginate(10);
+
+        return view('admin.show_donasi', compact('data'));
+    }
+
+    public function statusDonasi($id){
+        $data = \DB::table('donasi')->where('id_donasi', $id)->first();
+
+        $status_sekarang = $data->status;
+
+        if($status_sekarang=='pending'){
+            \DB::table('donasi')->where('id_donasi',$id)->update([
+                'status'=>'confirmed'
+            ]);
+        }
+
+        \Mail::to($data->email_donatur)->send(new DonasiConfirmed($data));
+        return redirect('admin/donasi');
+    }
+}
 
     public function showVerifikasiMateri()
     {        

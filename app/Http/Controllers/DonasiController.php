@@ -40,61 +40,21 @@ class DonasiController extends Controller
      */
     public function store(Request $request)
     {
+
+        $bukti_transfer = time().'.'.$request->bukti_transfer->extension();
+        $request->bukti_transfer->move(public_path('image/donasi'), $bukti_transfer);
+
         $model = new Donasi;
         $model->nama_donatur = $request->nama_donatur;
         $model->email_donatur = $request->email_donatur;
         $model->total_donasi = $request->total_donasi;
         $model->deskripsi_donasi = $request->deskripsi_donasi;
-        $model->bukti_transfer = $request->bukti_transfer;
+        $model->bukti_transfer = $bukti_transfer;
+        $model->status = $request -> status;
         $model->save();
 
         \Mail::to($model->email_donatur)->send(new DonasiCreateMail($model));
 
         return redirect('/donasi/create')->with('success', 'Data Berhasil Tersimpan!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
