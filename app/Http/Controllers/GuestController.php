@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Request_Volunteer;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PengajuanRelawanProcessed;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -40,12 +42,17 @@ class GuestController extends Controller
     {
         $model = new Request_Volunteer;
         $model->nama_lengkap = $request->nama_lengkap;
+        $model->nama_organisasi = $request->nama_organisasi;
         $model->email = $request->email;
         $model->no_hp = $request->no_hp;
+        $model->startDate = $request->startDate;
+        $model->endDate = $request->endDate;
         $model->deskripsi = $request->deskripsi;
-        $model->berkas = $request->berkas;
-        $model->save();
+        $model->berkas = $request->file('berkas')->store('berkas');
+        $model->save(); 
         
+        \Mail::to($model->email)->send(new PengajuanRelawanProcessed($model));
+
         return redirect('/request-volunteer')->with('success', 'Data Berhasil Tersimpan!');
     }
 

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DonasiConfirmed;
+use App\Mail\PengajuanRelawanAccepted;
+use App\Mail\PengajuanRelawanDenied;
 use App\Models\Testimoni;
 use App\Models\Materi;
+use App\Models\Request_Volunteer;
 use App\Models\Donasi;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -37,7 +40,7 @@ class AdminController extends Controller
     {
         $data = DB::table('testimoni')                
                 ->join('users', 'users.id', '=', 'testimoni.id_users')
-                ->select('testimoni.id_testimoni', 'testimoni.id_users', 'testimoni.nama','testimoni.deskripsi_testimoni', 'testimoni.created_at')
+                ->select('testimoni.id_testimoni', 'testimoni.id_users', 'testimoni.nama', 'testimoni.role', 'testimoni.foto', 'testimoni.deskripsi_testimoni', 'testimoni.created_at')
                 ->where('testimoni.id_users', Auth::user()->id)
                 ->orderBy('testimoni.created_at', 'DESC')
                 ->get();
@@ -50,13 +53,22 @@ class AdminController extends Controller
     {
         $validate = $request->validate([
             'id_users' => 'required',
-            'nama' => 'required',            
+            'nama' => 'required',
+            'role' => 'required',
+            'foto' => 'required',            
             'deskripsi_testimoni' => 'required'            
-        ]);      
-        
+        ]);
+
+        if ($foto = $request->file('foto')) {
+            $destinationPath = 'profil_testimoni';  
+            $fileSource1 = $foto->getClientOriginalName();
+            $foto->move($destinationPath, $fileSource1);
+        }
         $testimoni = Testimoni::create([
             'id_users' => $request->id_users,
-            'nama' => $request->nama,                           
+            'nama' => $request->nama,              
+            'role' => $request->role,
+            'foto' => $fileSource1,           
             'deskripsi_testimoni' => $request->deskripsi_testimoni           
         ]);           
 
@@ -69,12 +81,21 @@ class AdminController extends Controller
 
         $validate = $request->validate([
             'id_users' => 'required',
-            'nama' => 'required',            
+            'nama' => 'required',      
+            'role' => 'required',
+            'foto' => 'required',
             'deskripsi_testimoni' => 'required'                                  
         ]);
+        if ($foto = $request->file('foto')) {
+            $destinationPath = 'profil_testimoni';  
+            $fileSource1 = $foto->getClientOriginalName();
+            $foto->move($destinationPath, $fileSource1);
+        }
 
         $data->id_users = $request->id_users;
         $data->nama = $request->nama;        
+        $data->role = $request->role;        
+        $data->foto = $fileSource1;        
         $data->deskripsi_testimoni = $request->deskripsi_testimoni;                    
         $data->save();
         
@@ -208,5 +229,62 @@ class AdminController extends Controller
                 ->get();
 
         return view('admin.show_verifikasi_materi', compact('data'));
+    }
+
+    public function showVerifikasiPengajuan()
+    {        
+        $data = Request_Volunteer::all();
+
+        return view('admin.show_verifikasi_pengajuan_relawan', compact('data'));
+    }
+
+    public function cariVerifikasiPengajuan(Request $request)
+    {        
+        $keyword = $request->cari;
+        $data = DB::table('pengajuan_relawan')
+                ->where('nama_organisasi', 'like', "%". $keyword . "%")
+                ->orderBy('created_at', 'DESC')
+                ->get();
+
+        return view('admin.show_verifikasi_pengajuan_relawan', compact('data'));
+    }
+
+    public function verifikasiTerimaPengajuan(Request $request, $id)
+    {
+        $data = Request_Volunteer::find($id);                    
+
+        $validate = $request->validate([                      
+            'status' => 'required'                                  
+        ]);
+
+        $data->status = $request->status;                      
+        $data->save();
+
+        \Mail::to($data->email)->send(new PengajuanRelawanAccepted($data));
+        
+        return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function verifikasiTolakPengajuan(Request $request, $id)
+    {
+        $data = Request_Volunteer::find($id);                    
+
+        $validate = $request->validate([                      
+            'status' => 'required'                                  
+        ]);
+
+        $data->status = $request->status;                      
+        $data->save();
+
+        \Mail::to($data->email)->send(new PengajuanRelawanDenied($data));
+        
+        return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteVerifikasiPengajuan($id)
+    {
+        DB::table('pengajuan_relawan')->where('id_pengajuan_relawan', $id)->delete();        
+
+        return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Dihapus');
     }
 }
