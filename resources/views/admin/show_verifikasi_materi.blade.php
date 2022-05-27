@@ -69,7 +69,7 @@
                                     <span class="badge bg-danger">{{ $datas->status }}</span>
                                 @endif
                             </td>
-                            <td class="text-nowrap">          
+                            <td>          
                                 <button type="button" class="btn btn-sm btn-secondary mb-1" data-toggle="modal" data-target="#showDetailMateri_{{ $datas->slug }}">
                                     <i class="fas fa-eye"></i>
                                 </button> 
