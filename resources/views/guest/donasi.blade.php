@@ -51,7 +51,7 @@
         <div class="card">
             <div class="card-body">
             <h2 style="text-align:center;">Form Donasi</h2>
-            <form action="{{url('/donasi/create')}}" class="contact100-form validate-form" method="POST">
+            <form action="{{url('/donasi/create')}}" class="contact100-form validate-form" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="nama_donatur" class="form-label">Nama</label>
@@ -73,6 +73,7 @@
                     <label for="bukti_transfer" class="form-label">Bukti Transfer</label>
                     <input class="form-control" type="file" id="bukti_transfer" name="bukti_transfer" required>
                 </div>
+                <input type="hidden" id="status" name="status" value="pending">
                 <button type="submit" class="btn" style="background-color:#297BBF; color:#fff;">Kirim</button>
             </form>
             </div>
