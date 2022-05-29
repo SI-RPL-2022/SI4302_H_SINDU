@@ -55,6 +55,8 @@ Route::get('/relawan/materi/edit/{id}', [App\Http\Controllers\RelawanController:
 Route::post('/relawan/materi/update/{id}', [App\Http\Controllers\RelawanController::class, 'updateMateri'])->name('relawan.update.materi')->middleware('relawan_level');
 Route::get('/relawan/materi/delete/{id}', [App\Http\Controllers\RelawanController::class, 'deleteMateri'])->middleware('relawan_level');
 Route::get('/relawan/materi/cari', [App\Http\Controllers\RelawanController::class, 'cariMateri'])->name('relawan.cari.materi')->middleware('relawan_level');
+Route::get('/relawan/mendaftar', [App\Http\Controllers\RelawanController::class, 'showRequest'])->name('relawan.pendaftaran_relawan');
+Route::post('/relawan/mendaftar', [App\Http\Controllers\RelawanController::class, 'store_pendaftaran_relawan'])->name('relawan.pendaftaran_relawan.store');
 
 // Route Donasi
 Route::post('/donasi/create', [App\Http\Controllers\DonasiController::class, 'store'])->name('donasi.store');

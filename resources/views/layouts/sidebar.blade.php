@@ -53,7 +53,7 @@
               </a>
             </li>  
             <li class="nav-item">
-              <a href="../widgets.html" class="nav-link">
+              <a href="../relawan/mendaftar" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>Jadi Relawan</p>
               </a>

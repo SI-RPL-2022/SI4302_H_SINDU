@@ -40,7 +40,14 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
+
         $model = new Request_Volunteer;
+
+        $foto_lokasi = time().'.'.$request->foto_lokasi->extension();
+        $request->foto_lokasi->move(public_path('image/foto_lokasi'), $foto_lokasi);
+        $berkas = time().'.'.$request->berkas->extension();
+        $request->berkas->move(public_path('berkas/pengajuan_relawan'), $berkas);
+
         $model->nama_lengkap = $request->nama_lengkap;
         $model->nama_organisasi = $request->nama_organisasi;
         $model->email = $request->email;
@@ -48,10 +55,15 @@ class GuestController extends Controller
         $model->startDate = $request->startDate;
         $model->endDate = $request->endDate;
         $model->deskripsi = $request->deskripsi;
-        $model->berkas = $request->file('berkas')->store('berkas');
+        $model->deskripsi_lengkap = $request->deskripsi_lengkap;
+        $model->jumlah_relawan = $request->jumlah_relawan;
+        $model->syarat_umum_pertama = $request->syarat_umum_pertama;
+        $model->syarat_umum_kedua = $request->syarat_umum_kedua;
+        $model->foto_lokasi = $foto_lokasi;
+        $model->berkas = $berkas;
         $model->save(); 
         
-        \Mail::to($model->email)->send(new PengajuanRelawanProcessed($model));
+        // \Mail::to($model->email)->send(new PengajuanRelawanProcessed($model));
 
         return redirect('/request-volunteer')->with('success', 'Data Berhasil Tersimpan!');
     }

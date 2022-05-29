@@ -37,6 +37,26 @@
                     <textarea class="form-control" id="deskripsi" rows="2" name="deskripsi" required></textarea>
                 </div>
                 <div class="mb-3">
+                    <label for="deskripsi_lengkap" class="form-label">Deskripsi Lengkap</label>
+                    <textarea class="form-control" id="deskripsi_lengkap" rows="4" name="deskripsi_lengkap" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="jumlah_relawan" class="form-label">Jumlah Relawan</label>
+                    <input type="number" class="form-control" id="jumlah_relawan" name="jumlah_relawan" required>
+                </div>
+                <div class="mb-3">
+                    <label for="syarat_umum_pertama" class="form-label">Persyaratan Umum Pertama</label>
+                    <input type="text" class="form-control" id="syarat_umum_pertama" name="syarat_umum_pertama" required>
+                </div>
+                <div class="mb-3">
+                    <label for="syarat_umum_kedua" class="form-label">Persyaratan Umum Kedua</label>
+                    <input type="text" class="form-control" id="syarat_umum_kedua" name="syarat_umum_kedua" required>
+                </div>
+                <div class="mb-3">
+                    <label for="foto_lokasi" class="form-label">Foto Lokasi</label>
+                    <input class="form-control" type="file" id="foto_lokasi" name="foto_lokasi" required>
+                </div>
+                <div class="mb-3">
                     <label for="berkas" class="form-label">Berkas</label>
                     <input class="form-control" type="file" id="berkas" name="berkas" required>
                 </div>

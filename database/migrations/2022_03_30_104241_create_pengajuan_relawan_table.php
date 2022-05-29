@@ -21,7 +21,12 @@ class CreatePengajuanRelawanTable extends Migration
             $table->string('no_hp', 13); 
             $table->date('startDate'); 
             $table->date('endDate'); 
-            $table->string('deskripsi'); 
+            $table->string('deskripsi');
+            $table->string('deskripsi_lengkap');
+            $table->string('jumlah_relawan');
+            $table->string('syarat_umum_pertama');
+            $table->string('syarat_umum_kedua');
+            $table->string('foto_lokasi');
             $table->string('berkas'); 
             $table->string('status')->default('Diproses'); 
             $table->timestamps();
