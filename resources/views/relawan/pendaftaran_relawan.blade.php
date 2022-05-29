@@ -2,10 +2,10 @@
 
 @section('content')
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
+<div class="card-group border-transparent">
     @foreach ($data as $key => $datas)
-    <div class="col">
-        <div class="card mb-3" style="max-width: 540px;">
+    <div class="card-group border-transparent">
+        <div class="card mb-3 p-3 border-transparent" style="max-width: 540px; ">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="{{asset ('image/foto_lokasi/'.$datas->foto_lokasi)}}" class="img-fluid rounded-start" title="" alt="">
@@ -27,8 +27,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>    
     </div>
+    
     <!-- Modal Ikuti-->
     <div class="modal" id="modalikut-{{ $datas->id_pengajuan_relawan }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalikut" aria-hidden="true">
         <div class="modal-dialog">

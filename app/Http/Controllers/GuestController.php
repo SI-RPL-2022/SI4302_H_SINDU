@@ -59,8 +59,8 @@ class GuestController extends Controller
         $model->jumlah_relawan = $request->jumlah_relawan;
         $model->syarat_umum_pertama = $request->syarat_umum_pertama;
         $model->syarat_umum_kedua = $request->syarat_umum_kedua;
-        $model->foto_lokasi = $request->foto_lokasi;
-        $model->berkas = $request->berkas;
+        $model->foto_lokasi = $foto_lokasi;
+        $model->berkas = $berkas;
         $model->save(); 
         
         // \Mail::to($model->email)->send(new PengajuanRelawanProcessed($model));
