@@ -72,11 +72,10 @@
                             </td>
                             <td>
                             @if($datas->status =='pending')
-                                <a href="{{url ('admin/donasi/status/'. $datas->id_donasi)}}" class="btn btn-warning btn-sm text-white">Terima</a>         
+                                <a href="{{url ('admin/donasi/status/'. $datas->id_donasi)}}" class="btn btn-warning btn-sm text-white">Terima</a>
                             @else
                                 <button type="button" class="btn btn-secondary btn-sm" disabled>Diterima</button>   
                             @endif
-                                
                                 <a type="button" class="btn btn-danger btn-sm" href="{{ url('/admin/donasi/delete/'.$datas->id_donasi) }}">Hapus</a>
                             </td>
                         </tr>

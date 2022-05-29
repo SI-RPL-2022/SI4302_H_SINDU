@@ -163,8 +163,8 @@ class RelawanController extends Controller
     }
     public function showRequest()
     {
-        $data = DB::table('request_volunteer')                
-                ->select('id_req_volunteer','nama_lengkap','email','no_hp','deskripsi','berkas')
+        $data = DB::table('pengajuan_relawan')                
+                ->select('id_pengajuan_relawan','nama_organisasi','email','no_hp','deskripsi','deskripsi_lengkap','jumlah_relawan','startDate','endDate','syarat_umum_pertama','syarat_umum_kedua','foto_lokasi','berkas')
                 ->get();
         return view('relawan.pendaftaran_relawan', compact('data'));
         }
