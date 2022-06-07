@@ -15,6 +15,8 @@ class CreateMataPelajaranTable extends Migration
     {
         Schema::create('mata_pelajaran', function (Blueprint $table) {
             $table->id('id_mata_pelajaran');
+            $table->bigInteger('id_kelas')->unsigned();
+            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nama_mata_pelajaran');
         });
     }

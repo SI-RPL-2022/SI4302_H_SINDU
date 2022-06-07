@@ -6,9 +6,10 @@
   <title>SinDu | @yield('title')</title>  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">    
   <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/f1223f01a6.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>dw
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ asset('css/overlayScrollbars/OverlayScrollbars.min.css') }}">   
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">  
   <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">          
@@ -84,6 +85,13 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user-friends"></i>                
                 <p>Akun Relawan</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{ route('admin.show.mata.pelajaran') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.mata.pelajaran'
+                 ? 'active' : '' }}">
+                <i class="nav-icon fas fa-briefcase"></i>            
+                <p>Data Mata Pelajaran</p>
               </a>
             </li> 
             <li class="nav-item">

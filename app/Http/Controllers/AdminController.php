@@ -9,6 +9,8 @@ use App\Mail\PengajuanRelawanAccepted;
 use App\Mail\PengajuanRelawanDenied;
 use App\Models\Testimoni;
 use App\Models\Materi;
+use App\Models\Kelas;
+use App\Models\Mata_Pelajaran;
 use App\Models\Request_Volunteer;
 use App\Models\Donasi;
 use Illuminate\Support\Facades\DB;
@@ -286,5 +288,62 @@ class AdminController extends Controller
         DB::table('pengajuan_relawan')->where('id_pengajuan_relawan', $id)->delete();        
 
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function showAllDataKelas()
+    {
+        $data = Kelas::all();
+
+        return view('admin.show_kelas', compact('data'));
+    }
+
+    public function tambahDataKelas(Request $request)
+    {
+        $validate = $request->validate([            
+            'nama_kelas' => 'required|unique:kelas'
+        ]);
+        
+        $kelas = Kelas::create([
+            'nama_kelas' => $request->nama_kelas                      
+        ]);        
+
+        return redirect(route('admin.show.kelas'))->with('success', 'Data Berhasil Ditambahkan');
+    }
+
+    public function updateDataKelas(Request $request, $id)
+    {
+        $data = Kelas::find($id);                    
+
+        $validate = $request->validate([            
+            'nama_kelas' => 'required|unique:kelas'
+        ]);
+
+        $data->nama_kelas = $request->nama_kelas;            
+        $data->save();
+        
+        return redirect(route('admin.show.kelas'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteDataKelas($id)
+    {
+        DB::table('kelas')->where('id_kelas', $id)->delete();        
+
+        return redirect(route('admin.show.kelas'))->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function cariDataKelas(Request $request)
+    {        
+        $keyword = $request->cari;
+        $data = DB::table('kelas')
+                ->where('nama_kelas', 'like', "%". $keyword . "%")                
+                ->get();
+
+        return view('admin.show_kelas', compact('data'));
+    }
+
+
+    public function showAllMataPelajaran()
+    {
+        return view('admin.show_mata_pelajaran');
     }
 }
