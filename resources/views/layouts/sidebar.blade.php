@@ -88,8 +88,10 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="{{ route('admin.show.mata.pelajaran') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.mata.pelajaran'
-                 ? 'active' : '' }}">
+              <a href="{{ route('admin.show.mata.pelajaran') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.mata.pelajaran' ||
+                request()->route()->getName() === 'admin.cari.mata.pelajaran' ||
+                request()->route()->getName() === 'admin.show.kelas' ||
+                request()->route()->getName() === 'admin.cari.kelas' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-briefcase"></i>            
                 <p>Data Mata Pelajaran</p>
               </a>

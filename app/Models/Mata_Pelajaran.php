@@ -13,6 +13,7 @@ class Mata_Pelajaran extends Model
     public $primaryKey = 'id_mata_pelajaran';
     protected $fillable = [
         'id_mata_pelajaran',
+        'id_kelas',
         'nama_mata_pelajaran'            
     ];  
     public $timestamps = false;

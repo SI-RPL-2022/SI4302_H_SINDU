@@ -51,6 +51,10 @@ Route::post('/admin/data-kelas/update/{id}', [App\Http\Controllers\AdminControll
 Route::get('/admin/data-kelas/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteDataKelas'])->middleware('admin_level');
 Route::get('/admin/data-kelas/cari', [App\Http\Controllers\AdminController::class, 'cariDataKelas'])->name('admin.cari.kelas')->middleware('admin_level');
 Route::get('/admin/data-mata-pelajaran', [App\Http\Controllers\AdminController::class, 'showAllMataPelajaran'])->name('admin.show.mata.pelajaran')->middleware('admin_level');
+Route::post('/admin/data-mata-pelajaran/tambah', [App\Http\Controllers\AdminController::class, 'tambahDataMataPelajaran'])->name('admin.tambah.mata.pelajaran')->middleware('admin_level');
+Route::post('/admin/data-mata-pelajaran/update/{id}', [App\Http\Controllers\AdminController::class, 'updateDataMataPelajaran'])->name('admin.update.mata.pelajaran')->middleware('admin_level');
+Route::get('/admin/data-mata-pelajaran/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteDataMataPelajaran'])->middleware('admin_level');
+Route::get('/admin/data-mata-pelajaran/cari', [App\Http\Controllers\AdminController::class, 'cariDataMataPelajaran'])->name('admin.cari.mata.pelajaran')->middleware('admin_level');
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');

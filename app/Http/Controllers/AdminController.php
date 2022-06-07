@@ -341,9 +341,67 @@ class AdminController extends Controller
         return view('admin.show_kelas', compact('data'));
     }
 
-
     public function showAllMataPelajaran()
     {
-        return view('admin.show_mata_pelajaran');
+        $kelas = Kelas::all();
+        $data = DB::table('mata_pelajaran')
+                ->select('mata_pelajaran.id_mata_pelajaran', 'mata_pelajaran.nama_mata_pelajaran',
+                    'kelas.nama_kelas', 'kelas.id_kelas')
+                ->join('kelas', 'kelas.id_kelas', '=', 'mata_pelajaran.id_kelas')                                
+                ->get();
+
+        return view('admin.show_mata_pelajaran', compact('kelas', 'data'));
+    }
+
+    public function tambahDataMataPelajaran(Request $request)
+    {
+        $validate = $request->validate([
+            'id_kelas' => 'required',
+            'nama_mata_pelajaran' => 'required'
+        ]);
+        
+        $kelas = Mata_Pelajaran::create([
+            'id_kelas' => $request->id_kelas,                      
+            'nama_mata_pelajaran' => $request->nama_mata_pelajaran
+        ]);        
+
+        return redirect(route('admin.show.mata.pelajaran'))->with('success', 'Data Berhasil Ditambahkan');
+    }
+
+    public function updateDataMataPelajaran(Request $request, $id)
+    {
+        $data = Mata_Pelajaran::find($id);                    
+
+        $validate = $request->validate([
+            'id_kelas' => 'required',
+            'nama_mata_pelajaran' => 'required'
+        ]);
+
+        $data->id_kelas = $request->id_kelas;            
+        $data->nama_mata_pelajaran = $request->nama_mata_pelajaran;   
+        $data->save();
+        
+        return redirect(route('admin.show.mata.pelajaran'))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteDataMataPelajaran($id)
+    {
+        DB::table('mata_pelajaran')->where('id_mata_pelajaran', $id)->delete();        
+
+        return redirect(route('admin.show.mata.pelajaran'))->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function cariDataMataPelajaran(Request $request)
+    {        
+        $keyword = $request->cari;
+        $kelas = Kelas::all();
+        $data = DB::table('mata_pelajaran')
+                ->select('mata_pelajaran.id_mata_pelajaran', 'mata_pelajaran.nama_mata_pelajaran',
+                    'kelas.nama_kelas', 'kelas.id_kelas')
+                ->join('kelas', 'kelas.id_kelas', '=', 'mata_pelajaran.id_kelas')                                
+                ->where('mata_pelajaran.nama_mata_pelajaran', 'like', "%". $keyword . "%") 
+                ->get();        
+
+        return view('admin.show_mata_pelajaran', compact('kelas', 'data'));
     }
 }
