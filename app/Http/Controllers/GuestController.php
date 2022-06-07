@@ -68,6 +68,11 @@ class GuestController extends Controller
         return redirect('/request-volunteer')->with('success', 'Data Berhasil Tersimpan!');
     }
 
+    public function showAllMateri(Request $request)
+    {
+        return view('guest.show_all_materi');
+    }
+
     /**
      * Display the specified resource.
      *

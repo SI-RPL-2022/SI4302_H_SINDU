@@ -30,9 +30,8 @@
         @include('partials.navbar')
         <main class="py-4">
             @yield('content')
-        </main>
-        @include('partials.footer')
+        </main>        
     </div>
 </body>
-
+@include('partials.footer')
 </html>

@@ -9,6 +9,12 @@ body {
     height: 40em;
 }
 
+.title-materi-container {
+    background-image: url('/img/materi-bg.png');
+    background-size: cover;
+    height: 30em;
+}
+
 .auth-img {
     width: 100%;
     height: 45vw;
