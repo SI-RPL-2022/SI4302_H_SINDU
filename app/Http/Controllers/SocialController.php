@@ -25,7 +25,7 @@ class SocialController extends Controller
             $user = User::where('google_id', $user->id)->first();
             if($user){
                 Auth::login($user);
-                return redirect('/');
+                return redirect()->route('relawan.index');
             }else{
                 $user = Socialite::driver('google')->stateless()->user();
                 $newUser = User::create([
@@ -35,7 +35,7 @@ class SocialController extends Controller
                     'password' => Hash::make(Str::random(10))
                 ]);
                 Auth::login($newUser);
-                return redirect('/');
+                return redirect()->route('relawan.index');
             }
         } catch (Exception $e) {
             dd($e->getMessage());

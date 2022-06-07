@@ -24,7 +24,7 @@
                             <label for="">Mata Pelajaran</label>
                             <select name="id_mata_pelajaran" class="custom-select custom-select-sm @error('id_mata_pelajaran') is-invalid @enderror">                                                                
                                 @foreach($mapel as $mapels)
-                                    <option value="{{ $mapels->id_mata_pelajaran }}" {{ $data->id_mata_pelajaran == $mapels->id_mata_pelajaran ? 'selected' : '' }}>{{ $mapels->nama_mata_pelajaran }}</option>                            
+                                    <option value="{{ $mapels->id_mata_pelajaran }}" {{ $data->id_mata_pelajaran == $mapels->id_mata_pelajaran ? 'selected' : '' }}>{{ $mapels->nama_mata_pelajaran }} - Kelas {{ $mapels->nama_kelas }}</option>                            
                                 @endforeach                        
                             </select> 
                             @error('id_mata_pelajaran')

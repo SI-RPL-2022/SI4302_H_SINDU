@@ -49,7 +49,12 @@ class RelawanController extends Controller
 
     public function tambahMateri()
     {
-        $mapel = Mata_Pelajaran::all();
+        $mapel = DB::table('mata_pelajaran')
+                ->select('mata_pelajaran.id_mata_pelajaran', 'mata_pelajaran.nama_mata_pelajaran',
+                    'kelas.nama_kelas')
+                ->join('kelas', 'kelas.id_kelas', '=', 'mata_pelajaran.id_kelas')   
+                ->get();
+
         return view('relawan.tambah_materi', compact('mapel'));
     }
 
@@ -59,7 +64,7 @@ class RelawanController extends Controller
             'id_users' => 'required',
             'id_mata_pelajaran' => 'required',
             'judul_materi' => 'required|unique:materi',
-            'cover_materi' => 'required|image|mimes:jpeg,png,jpg|dimensions:width=1920,height=1080',
+            'cover_materi' => 'required|image|mimes:jpeg,png,jpg',
             'deskripsi_materi' => 'required'            
         ]);
 
@@ -95,7 +100,11 @@ class RelawanController extends Controller
     public function editMateri($id)
     {
         $data = Materi::find($id);
-        $mapel = Mata_Pelajaran::all();
+        $mapel = DB::table('mata_pelajaran')
+                ->select('mata_pelajaran.id_mata_pelajaran', 'mata_pelajaran.nama_mata_pelajaran',
+                    'kelas.nama_kelas')
+                ->join('kelas', 'kelas.id_kelas', '=', 'mata_pelajaran.id_kelas')   
+                ->get();
 
         return view('relawan.edit_materi', compact('data', 'mapel'));
     }
@@ -108,7 +117,7 @@ class RelawanController extends Controller
             'id_users' => 'required',
             'id_mata_pelajaran' => 'required',
             'judul_materi' => 'required',
-            'cover_materi_new' => 'image|mimes:jpeg,png,jpg|dimensions:width=1920,height=1080',
+            'cover_materi_new' => 'image|mimes:jpeg,png,jpg',
             'deskripsi_materi' => 'required'                                   
         ]);
 
