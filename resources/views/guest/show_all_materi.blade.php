@@ -25,24 +25,26 @@
     <div class="mb-2">
         <div class="fw-bold fs-4 mb-2" style="color:#297BBF;">Yuk Selesaikan!</div>
         <div class="row g-2">
+            @foreach($dataReq as $dataReqs)
             <div class="col-12 col-md-12 col-lg-4">
-                <div class="card">
+                <div class="card" style="min-height:150px;">
                     <div class="row g-0">
                         <div class="col-sm-5 position-relative">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUdV_5sTPgc0YHfgAu9j7KZi7ELdM5ORfBxg&usqp=CAU" class="card-img fit-cover w-100 h-100" alt="...">
+                            <img src="{{ asset('image/cover/'.$dataReqs->cover_materi) }}" class="card-img fit-cover w-100" style="height:150px;" alt="...">
                         </div>
                         <div class="col-sm-7">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a class="link-dark text-decoration-none" style="font-size:14px;" href="#" target="_blank">Perkalian Dasar untuk Sekolah Dasar</a>
+                                    <a class="link-dark text-decoration-none" style="font-size:14px;" href="#" target="_blank">{{ $dataReqs->judul_materi }}</a>
                                 </h5>
-                                <p class="card-text text-muted" style="font-size:12px;">Ujang Hernandes</p>
-                                <p class="card-text" style="font-size:10px;">Kelas VI, Matematika</p>
+                                <p class="card-text text-muted" style="font-size:12px;">{{ $dataReqs->name }}</p>
+                                <p class="card-text" style="font-size:10px;">Kelas {{ $dataReqs->nama_kelas }}, {{ $dataReqs->nama_mata_pelajaran }}</p>
                             </div>                        
                         </div>
                     </div>
                 </div>
-            </div>                      
+            </div> 
+            @endforeach                  
         </div>
     </div>  
     <div class="mt-5 mb-5">
@@ -63,78 +65,26 @@
             </div>            
         </div>        
         <div class="row g-2">
+            @foreach($dataAll as $dataAlls)
             <div class="col-12 col-md-12 col-lg-4">
-                <div class="card">
+                <div class="card" style="min-height:150px;">
                     <div class="row g-0">
                         <div class="col-sm-5 position-relative">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUdV_5sTPgc0YHfgAu9j7KZi7ELdM5ORfBxg&usqp=CAU" class="card-img fit-cover w-100 h-100" alt="...">
+                            <img src="{{ asset('image/cover/'.$dataAlls->cover_materi) }}" class="card-img fit-cover w-100" style="height:150px;" alt="...">
                         </div>
                         <div class="col-sm-7">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a class="link-dark text-decoration-none" style="font-size:14px;" href="#" target="_blank">Perkalian Dasar untuk Sekolah Dasar</a>
+                                    <a class="link-dark text-decoration-none" style="font-size:14px;" href="#" target="_blank">{{ $dataAlls->judul_materi }}</a>
                                 </h5>
-                                <p class="card-text text-muted" style="font-size:12px;">Ujang Hernandes</p>
-                                <p class="card-text" style="font-size:10px;">Kelas VI, Matematika</p>
+                                <p class="card-text text-muted" style="font-size:12px;">{{ $dataAlls->name }}</p>
+                                <p class="card-text" style="font-size:10px;">Kelas {{ $dataAlls->nama_kelas }}, {{ $dataAlls->nama_mata_pelajaran }}</p>
                             </div>                        
                         </div>
                     </div>
                 </div>
             </div>    
-            <div class="col-12 col-md-12 col-lg-4">
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-sm-5 position-relative">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUdV_5sTPgc0YHfgAu9j7KZi7ELdM5ORfBxg&usqp=CAU" class="card-img fit-cover w-100 h-100" alt="...">
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a class="link-dark text-decoration-none" style="font-size:14px;" href="#" target="_blank">Perkalian Dasar untuk Sekolah Dasar</a>
-                                </h5>
-                                <p class="card-text text-muted" style="font-size:12px;">Ujang Hernandes</p>
-                                <p class="card-text" style="font-size:10px;">Kelas VI, Matematika</p>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-12 col-md-12 col-lg-4">
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-sm-5 position-relative">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUdV_5sTPgc0YHfgAu9j7KZi7ELdM5ORfBxg&usqp=CAU" class="card-img fit-cover w-100 h-100" alt="...">
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a class="link-dark text-decoration-none" style="font-size:14px;" href="#" target="_blank">Perkalian Dasar untuk Sekolah Dasar</a>
-                                </h5>
-                                <p class="card-text text-muted" style="font-size:12px;">Ujang Hernandes</p>
-                                <p class="card-text" style="font-size:10px;">Kelas VI, Matematika</p>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-12 col-lg-4">
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-sm-5 position-relative">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUdV_5sTPgc0YHfgAu9j7KZi7ELdM5ORfBxg&usqp=CAU" class="card-img fit-cover w-100 h-100" alt="...">
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a class="link-dark text-decoration-none" style="font-size:14px;" href="#" target="_blank">Perkalian Dasar untuk Sekolah Dasar</a>
-                                </h5>
-                                <p class="card-text text-muted" style="font-size:12px;">Ujang Hernandes</p>
-                                <p class="card-text" style="font-size:10px;">Kelas VI, Matematika</p>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
-            </div>     
+            @endforeach                           
         </div>
     </div>          
 </div>

@@ -6,6 +6,7 @@ use App\Models\Request_Volunteer;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PengajuanRelawanProcessed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
@@ -70,7 +71,28 @@ class GuestController extends Controller
 
     public function showAllMateri(Request $request)
     {
-        return view('guest.show_all_materi');
+        $dataAll = DB::table('materi')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'users.name',
+                        'materi.cover_materi', 'kelas.nama_kelas', 'materi.slug')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')   
+                ->join('users', 'users.id', '=', 'materi.id_users')   
+                ->join('kelas', 'mata_pelajaran.id_kelas', 'kelas.id_kelas')
+                ->where('materi.status', 'Rilis')
+                ->orderBy('materi.judul_materi', 'ASC')
+                ->get();
+        
+        $dataReq = DB::table('materi')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'users.name',
+                        'materi.cover_materi', 'kelas.nama_kelas', 'materi.slug')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')   
+                ->join('users', 'users.id', '=', 'materi.id_users')   
+                ->join('kelas', 'mata_pelajaran.id_kelas', 'kelas.id_kelas')
+                ->where('materi.status', 'Rilis')
+                ->orderBy('materi.created_at', 'DESC')
+                ->limit(3)
+                ->get();
+
+        return view('guest.show_all_materi', compact('dataAll', 'dataReq'));
     }
 
     /**
