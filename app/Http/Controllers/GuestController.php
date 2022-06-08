@@ -95,6 +95,89 @@ class GuestController extends Controller
         return view('guest.show_all_materi', compact('dataAll', 'dataReq'));
     }
 
+    public function showDetailMateri($slug)
+    {
+        $data = DB::table('materi')
+                ->select('materi.judul_materi', 'materi.deskripsi_materi', 'materi.video_materi', 'materi.created_at', 'materi.cover_materi',
+                    'users.name')
+                ->join('users', 'users.id', '=', 'materi.id_users')  
+                ->where('materi.slug', $slug)
+                ->first();
+        
+        return view('guest.show_detail_materi', compact('data'));
+    }
+
+    public function cariMateri(Request $request)
+    {        
+        $keyword = $request->cari;
+        $dataAll = DB::table('materi')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'users.name',
+                        'materi.cover_materi', 'kelas.nama_kelas', 'materi.slug')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')   
+                ->join('users', 'users.id', '=', 'materi.id_users')   
+                ->join('kelas', 'mata_pelajaran.id_kelas', 'kelas.id_kelas')
+                ->where('materi.status', 'Rilis')
+                ->where('materi.judul_materi', 'like', "%". $keyword . "%") 
+                ->orderBy('materi.judul_materi', 'ASC')
+                ->get();
+        
+        $dataReq = DB::table('materi')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'users.name',
+                        'materi.cover_materi', 'kelas.nama_kelas', 'materi.slug')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')   
+                ->join('users', 'users.id', '=', 'materi.id_users')   
+                ->join('kelas', 'mata_pelajaran.id_kelas', 'kelas.id_kelas')
+                ->where('materi.status', 'Rilis')
+                ->orderBy('materi.created_at', 'DESC')
+                ->limit(3)
+                ->get();
+
+        return view('guest.show_all_materi', compact('dataAll', 'dataReq'));        
+    }
+
+    public function filterMateri(Request $request)
+    {        
+        $keyword = $request->cari;
+        $filter = $request->filter;
+
+        if($filter == "Kelas"){
+            $dataAll = DB::table('materi')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'users.name',
+                        'materi.cover_materi', 'kelas.nama_kelas', 'materi.slug')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')   
+                ->join('users', 'users.id', '=', 'materi.id_users')   
+                ->join('kelas', 'mata_pelajaran.id_kelas', 'kelas.id_kelas')
+                ->where('materi.status', 'Rilis')
+                ->where('kelas.nama_kelas', 'like', "%". $keyword . "%") 
+                ->orderBy('materi.judul_materi', 'ASC')
+                ->get();
+        }elseif($filter == "Mata Pelajaran"){
+            $dataAll = DB::table('materi')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'users.name',
+                        'materi.cover_materi', 'kelas.nama_kelas', 'materi.slug')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')   
+                ->join('users', 'users.id', '=', 'materi.id_users')   
+                ->join('kelas', 'mata_pelajaran.id_kelas', 'kelas.id_kelas')
+                ->where('materi.status', 'Rilis')
+                ->where('mata_pelajaran.nama_mata_pelajaran', 'like', "%". $keyword . "%") 
+                ->orderBy('materi.judul_materi', 'ASC')
+                ->get();
+        }        
+        
+        $dataReq = DB::table('materi')
+                ->select('materi.judul_materi', 'mata_pelajaran.nama_mata_pelajaran', 'users.name',
+                        'materi.cover_materi', 'kelas.nama_kelas', 'materi.slug')
+                ->join('mata_pelajaran', 'mata_pelajaran.id_mata_pelajaran', '=', 'materi.id_mata_pelajaran')   
+                ->join('users', 'users.id', '=', 'materi.id_users')   
+                ->join('kelas', 'mata_pelajaran.id_kelas', 'kelas.id_kelas')
+                ->where('materi.status', 'Rilis')
+                ->orderBy('materi.created_at', 'DESC')
+                ->limit(3)
+                ->get();
+
+        return view('guest.show_all_materi', compact('dataAll', 'dataReq'));        
+    }
+
     /**
      * Display the specified resource.
      *

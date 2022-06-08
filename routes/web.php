@@ -76,6 +76,9 @@ Route::get('/donasi/create', [App\Http\Controllers\DonasiController::class, 'cre
 Route::post('/request-volunteer', [App\Http\Controllers\GuestController::class, 'store'])->name('request_volunteer.store');
 Route::get('/request-volunteer', [App\Http\Controllers\GuestController::class, 'create_request'])->name('request_volunteer.create');
 Route::get('/materi', [App\Http\Controllers\GuestController::class, 'showAllMateri'])->name('show.all.materi');
+Route::get('/materi/cari', [App\Http\Controllers\GuestController::class, 'cariMateri'])->name('cari.materi');
+Route::get('/materi/filter', [App\Http\Controllers\GuestController::class, 'filterMateri'])->name('filter.materi');
+Route::get('/materi/{slug}', [App\Http\Controllers\GuestController::class, 'showDetailMateri'])->name('show.detail.materi');
 // Google Auth
 Route::get('redirect', [App\Http\Controllers\SocialController::class, 'redirect']);
 Route::get('callback/google', [App\Http\Controllers\SocialController::class, 'callback']);
