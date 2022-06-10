@@ -190,4 +190,12 @@ class RelawanController extends Controller
         return redirect('/relawan/mendaftar')->with('success', 'Data Berhasil Tersimpan!');
     }
 
+    public function profil(){
+        // return view('relawan.profil', array('user' => Auth::user()));
+        $data = DB::table('users')                
+                ->select('name','email','jenis_kelamin','nik', 'alamat', 'no_hp', 'tgl_lahir', 'riwayat_pendidikan', 'foto_profile', 'password')
+                ->get();
+        
+        return view('relawan.profil', compact('data'));
+    }
 }

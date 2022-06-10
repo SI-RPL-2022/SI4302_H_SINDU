@@ -287,4 +287,13 @@ class AdminController extends Controller
 
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Dihapus');
     }
+
+    public function showProfil(){
+        // $data = DB::table('donasi')                
+        //         ->select('donasi.id_donasi', 'donasi.nama_donatur', 'donasi.email_donatur', 'donasi.total_donasi','donasi.deskripsi_donasi', 'donasi.bukti_transfer', 'donasi.status', 'donasi.created_at')
+        //         ->orderBy('donasi.created_at', 'DESC')
+        //         ->paginate(10);
+        
+        return view('admin.show_profil');
+    }
 }

@@ -47,7 +47,7 @@
               </a>
             </li>     
             <li class="nav-item">
-              <a href="../widgets.html" class="nav-link">
+              <a href="{{ route('relawan.profil') }}" class="nav-link {{ request()->route()->getName() === 'relawan.profil' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Profil</p>
               </a>
@@ -75,7 +75,7 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('admin.show.profil') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.profil' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Profil</p>
               </a>
