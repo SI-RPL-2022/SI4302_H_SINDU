@@ -44,7 +44,8 @@ Route::get('/admin/pengajuan-relawan', [App\Http\Controllers\AdminController::cl
 Route::get('/admin/pengajuan-relawan/cari', [App\Http\Controllers\AdminController::class, 'cariVerifikasiPengajuan'])->name('admin.cari.verifikasi.pengajuan')->middleware('admin_level');
 Route::post('/admin/pengajuan-relawan/terima-pengajuan/{id}', [App\Http\Controllers\AdminController::class, 'verifikasiTerimaPengajuan'])->name('admin.verifikasi.terima.pengajuan')->middleware('admin_level'); 
 Route::post('/admin/pengajuan-relawan/tolak-pengajuan/{id}', [App\Http\Controllers\AdminController::class, 'verifikasiTolakPengajuan'])->name('admin.verifikasi.tolak.pengajuan')->middleware('admin_level'); 
-Route::get('/admin/pengajuan-relawan/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteVerifikasiPengajuan'])->middleware('admin_level');
+Route::get('/admin/pengajuan-relawan/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteVerifikasiPengajuan'])->name('admin.verifikasi.delete.pengajuan')->middleware('admin_level');
+Route::get('/admin/pengajuan-relawan/detail/{id}', [App\Http\Controllers\AdminController::class, 'detailVerifikasiPengajuan'])->name('admin.detail.verifikasi.pengajuan')->middleware('admin_level');
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');

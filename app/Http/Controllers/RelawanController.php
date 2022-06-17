@@ -165,6 +165,7 @@ class RelawanController extends Controller
     {
         $data = DB::table('pengajuan_relawan')                
                 ->select('id_pengajuan_relawan','nama_organisasi','email','no_hp','deskripsi','deskripsi_lengkap','jumlah_relawan','startDate','endDate','syarat_umum_pertama','syarat_umum_kedua','foto_lokasi','berkas')
+                ->where('status', 'Diterima')
                 ->get();
         return view('relawan.pendaftaran_relawan', compact('data'));
         }

@@ -9,7 +9,6 @@
     <title>Document 297BBF</title>
 </head>
     <style>
-    {
         html, body{
             margin: 0;
             padding: 0;

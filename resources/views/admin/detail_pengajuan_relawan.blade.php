@@ -14,6 +14,9 @@
             {{ session('success') }}
         </div>                                                                   
         @endif                                     
+        <a href="{{ route('admin.show.verifikasi.pengajuan') }}" class="btn btn-sm btn-danger">
+            Kembali
+        </a>
         <div class="card">
             <div class="card-header">                
                 <div class="card-tools mt-1">
@@ -68,7 +71,7 @@
                                 @endif
                             </td>
                             <td class="text-nowrap">          
-                                <a href="{{ url('/admin/pengajuan-relawan/detail/'. $datas->id_pengajuan_relawan) }}" class="btn btn-sm btn-secondary mb-1">
+                                <a href="{{ url('/admin/pengajuan-relawan/detail/'. $datas->id .'') }}" class="btn btn-sm btn-secondary mb-1" data-toggle="modal" data-target="">
                                     <i class="fas fa-eye"></i>
                                 </a>                                                                                            
                                 <a href="{{ url('/admin/pengajuan-relawan/delete/'.$datas->id_pengajuan_relawan) }}" class="btn btn-sm btn-square btn-danger mb-1"><i class="fas fa-trash"></i></a>

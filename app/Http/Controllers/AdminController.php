@@ -10,6 +10,7 @@ use App\Mail\PengajuanRelawanDenied;
 use App\Models\Testimoni;
 use App\Models\Materi;
 use App\Models\Request_Volunteer;
+use App\Models\Detail_Pengajuan_Relawan;
 use App\Models\Donasi;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -260,7 +261,7 @@ class AdminController extends Controller
         $data->status = $request->status;                      
         $data->save();
 
-        \Mail::to($data->email)->send(new PengajuanRelawanAccepted($data));
+        // \Mail::to($data->email)->send(new PengajuanRelawanAccepted($data));
         
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
     }
@@ -276,7 +277,7 @@ class AdminController extends Controller
         $data->status = $request->status;                      
         $data->save();
 
-        \Mail::to($data->email)->send(new PengajuanRelawanDenied($data));
+        // \Mail::to($data->email)->send(new PengajuanRelawanDenied($data));
         
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
     }
@@ -286,5 +287,12 @@ class AdminController extends Controller
         DB::table('pengajuan_relawan')->where('id_pengajuan_relawan', $id)->delete();        
 
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Dihapus');
+    }
+    
+    public function detailVerifikasiPengajuan($id)
+    {        
+        $data = Detail_Pengajuan_Relawan::where('id_pengajuan_relawan', $id);
+
+        return view('admin.detail_pengajuan_relawan', compact('data'));
     }
 }
