@@ -32,7 +32,7 @@
     </style>
 <body>
     <footer class="footer">
-        <div class="footer-content text-white pt-5 pb-5" style="background-color:#297BBF; border-radius: 1em 1em 0 0;">
+        <div class="footer-content text-white pt-5 pb-5" style="background-color:#297BBF; {{ request()->route()->getName() === 'aboutus' ? '' : 'border-radius: 1em 1em 0 0;' }}">
             <div class="row ms-5">
                 <div class="footer-col col-6 mt-2">
                     <p class="me-5 pe-5"><strong>Sindu</strong> merupakan platform fasilitator antara relawan dengan organisasi/komunitas sosial dibidang pendidikan.</p>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="footer-col col mt-2 ">
                     <p class="fw-bold">Sindu</p>
-                    <a href="" class="text-white text-decoration-none">Tentang Kami</a> <br>
+                    <a href="{{ route('aboutus') }}" class="text-white text-decoration-none">Tentang Kami</a> <br>
                     <a href="{{ route('donasi.create') }}" class="text-white text-decoration-none">Donasi</a> <br>
                     <a href="" class="text-white text-decoration-none">Umpan Balik</a> <br>
                     <a href="" class="text-white text-decoration-none">Syarat dan Ketentuan</a> <br>

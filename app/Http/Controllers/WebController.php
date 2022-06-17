@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Testimoni;
+use App\Models\About;
 
 class WebController extends Controller
 {
@@ -18,6 +19,12 @@ class WebController extends Controller
         $slidesToShow = intval(floor(($testimoni->count())/2));
         $slidesToScroll = intval($slidesToShow/2);
         return view('index', compact('testimoni', 'slidesToShow', 'slidesToScroll'));
+    }
+
+    public function aboutUs()
+    {
+        $data = About::first();
+        return view('guest.aboutus', compact('data'));
     }
     /**
      * Store a newly created resource in storage.

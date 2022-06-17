@@ -113,6 +113,12 @@
                 <p>Pengajuan Relawan</p>                
               </a>
             </li> 
+            <li class="nav-item">
+              <a href="{{ route('admin.show.aboutus') }}" class="nav-link">
+                <i class="nav-icon fas fa-info-circle"></i>
+                <p>Konfigurasi Web</p>                
+              </a>
+            </li> 
             @endif                                    
             <li class="nav-header"><hr style="border-top:1px solid white;"></li>                                                                                                             
             <li class="nav-item">

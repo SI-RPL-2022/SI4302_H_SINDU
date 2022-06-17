@@ -21,6 +21,7 @@ use App\Http\Controllers\DonasiController;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\WebController::class, 'index'])->name('landing.page');
+Route::get('/aboutus', [App\Http\Controllers\WebController::class, 'aboutUs'])->name('aboutus');
 // Route::get('/', [App\Http\Controllers\WebController::class, 'donasi'])->name('donasi');
 // Route::get('/', [App\Http\Controllers\WebController::class, 'about'])->name('about');
 
@@ -45,6 +46,8 @@ Route::get('/admin/pengajuan-relawan/cari', [App\Http\Controllers\AdminControlle
 Route::post('/admin/pengajuan-relawan/terima-pengajuan/{id}', [App\Http\Controllers\AdminController::class, 'verifikasiTerimaPengajuan'])->name('admin.verifikasi.terima.pengajuan')->middleware('admin_level'); 
 Route::post('/admin/pengajuan-relawan/tolak-pengajuan/{id}', [App\Http\Controllers\AdminController::class, 'verifikasiTolakPengajuan'])->name('admin.verifikasi.tolak.pengajuan')->middleware('admin_level'); 
 Route::get('/admin/pengajuan-relawan/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteVerifikasiPengajuan'])->middleware('admin_level');
+Route::get('/admin/aboutus', [App\Http\Controllers\AdminController::class, 'showAboutUs'])->middleware('admin_level')->name('admin.show.aboutus');
+Route::post('/admin/aboutus/store', [App\Http\Controllers\AdminController::class, 'storeAboutUs'])->middleware('admin_level')->name('admin.store.aboutus');
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
