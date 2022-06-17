@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('no_hp', 13)->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('riwayat_pendidikan')->nullable();
-            $table->string('foto_profile')->default('relawan.jpg');
+            $table->string('foto_profile')->default('default.jpg');
             $table->rememberToken();
             $table->timestamps();
         });

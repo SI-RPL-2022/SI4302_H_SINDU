@@ -46,6 +46,8 @@ Route::post('/admin/pengajuan-relawan/terima-pengajuan/{id}', [App\Http\Controll
 Route::post('/admin/pengajuan-relawan/tolak-pengajuan/{id}', [App\Http\Controllers\AdminController::class, 'verifikasiTolakPengajuan'])->name('admin.verifikasi.tolak.pengajuan')->middleware('admin_level'); 
 Route::get('/admin/pengajuan-relawan/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteVerifikasiPengajuan'])->middleware('admin_level');
 Route::get('/admin/profil', [App\Http\Controllers\AdminController::class, 'showProfil'])->name('admin.show.profil')->middleware('admin_level'); 
+Route::put('/admin/profil/update', [App\Http\Controllers\AdminController::class, 'updateProfil'])->name('admin.update.profil')->middleware('admin_level'); 
+Route::put('/admin/profil/updates', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('admin.update.password')->middleware('admin_level'); 
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');
@@ -59,6 +61,8 @@ Route::get('/relawan/materi/cari', [App\Http\Controllers\RelawanController::clas
 Route::get('/relawan/mendaftar', [App\Http\Controllers\RelawanController::class, 'showRequest'])->name('relawan.pendaftaran_relawan');
 Route::post('/relawan/mendaftar', [App\Http\Controllers\RelawanController::class, 'store_pendaftaran_relawan'])->name('relawan.pendaftaran_relawan.store');
 Route::get('/relawan/profil', [App\Http\Controllers\RelawanController::class, 'profil'])->name('relawan.profil')->middleware('relawan_level'); 
+Route::put('/relawan/profil/update', [App\Http\Controllers\RelawanController::class, 'updateProfil'])->name('relawan.update.profil')->middleware('relawan_level'); 
+Route::put('/relawan/profil/updates', [App\Http\Controllers\RelawanController::class, 'updatePassword'])->name('relawan.update.password')->middleware('relawan_level'); 
 
 // Route Donasi
 Route::post('/donasi/create', [App\Http\Controllers\DonasiController::class, 'store'])->name('donasi.store');
