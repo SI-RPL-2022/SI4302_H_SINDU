@@ -77,6 +77,25 @@ body {
     text-justify: inter-word;
 }
 
+.about-container {
+    background-image: url('/img/header-bg.png');
+    background-size: cover;
+    height: 17em;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.team-container {
+    background-image: url('/img/team-bg.png');
+    background-size: cover;
+}
+
+.img-team {
+    height: 12rem;
+}
+
 @media (max-width: 767.98px) {
     .responsive-container {
         text-align: center;

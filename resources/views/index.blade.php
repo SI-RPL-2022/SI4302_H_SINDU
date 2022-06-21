@@ -11,10 +11,10 @@
         </div>
         <div class="text-center my-3">
             <a class="btn text-light bg-sindu mx-3" style="background-color: #297BBF; font-weight: 600; width: 12em;"
-                href="{{ route('login') }}">{{ __('Menjadi Relawan') }}</a>
+                href="{{ route('register') }}">{{ __('Menjadi Relawan') }}</a>
             <a class="btn text-light bg-sindu mx-3 hover-shadow"
                 style="background-color: #297BBF; font-weight: 600; width: 12em;"
-                href="{{ route('login') }}">{{ __('Cari Relawan') }}</a>
+                href="{{ route('request_volunteer.create') }}">{{ __('Cari Relawan') }}</a>
         </div>
     </div>
 </div>

@@ -32,9 +32,8 @@
                         <a class="nav-link text-light"
                             href="{{ route('show.all.materi') }}">{{ __('Materi') }}</a>
                     </li>
-                    {{-- <li class="nav-item mx-2">
-                        <a class="nav-link" href="{{ route('about') }}">{{ __('Tentang Kami') }}</a>
-                    </li> --}}
+                        <a class="nav-link text-light" href="{{ route('aboutus') }}">{{ __('Tentang Kami') }}</a>
+                    </li>
                     @if(Route::has('login'))
                         <li class="nav-item mx-2">
                             <a id="login-btn" class="btn text-light"

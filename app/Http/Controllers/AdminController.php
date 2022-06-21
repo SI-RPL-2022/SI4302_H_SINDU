@@ -13,6 +13,7 @@ use App\Models\Kelas;
 use App\Models\Mata_Pelajaran;
 use App\Models\Request_Volunteer;
 use App\Models\Donasi;
+use App\Models\About;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
@@ -403,5 +404,31 @@ class AdminController extends Controller
                 ->get();        
 
         return view('admin.show_mata_pelajaran', compact('kelas', 'data'));
+    }
+    public function showAboutUs()
+    {        
+        $data = About::first();
+
+        return view('admin.show_aboutus', compact('data'));
+    }
+
+    public function storeAboutUs(Request $request)
+    {
+        $validate = $request->validate([
+            'data' => 'required',
+        ]);
+        if ($request->id != null) {
+            $about = About::find($request->id);
+            $about->data = $request->data;
+            $about->save();  
+            return redirect(route('admin.show.aboutus'))->with('success', 'Data Berhasil Diperbarui');
+        } elseif ($request->id == null) {
+            $about = About::create([
+                'data' => $request->data,
+            ]);
+            return redirect(route('admin.show.aboutus'))->with('success', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect(route('admin.show.testimoni'))->with('error', 'Terdapat Kesalahan!');
+        }
     }
 }
