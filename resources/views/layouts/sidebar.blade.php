@@ -34,7 +34,7 @@
     <aside class="main-sidebar sidebar-dark-primary bg-indigo elevation-4">    
       <div class="sidebar">      
         <div class="text-center mt-4">
-          <img src="{{ asset('image/profil/'. Auth::user()->foto_profile) }}" class="img-circle elevation-2" alt="User Image" style="max-width:100px; max-height:100px;">
+          <img src="{{ asset('image/profil/'. Auth::user()->foto_profile) }}" class="img-circle elevation-2 " alt="User Image" style="max-width:100px; max-height:100px;">
           <a href="#" class="d-block mt-2" style="font-size:13px; color:white; font-weight:bold;">{{ Auth::user()->name }}</a>
           <a href="#" class="d-block" style="font-size:11px; color:white; font-weight:lighter;">{{ Auth::user()->level }}</a>
         </div>      
@@ -48,7 +48,7 @@
               </a>
             </li>     
             <li class="nav-item">
-              <a href="../widgets.html" class="nav-link">
+              <a href="{{ route('relawan.profil') }}" class="nav-link {{ request()->route()->getName() === 'relawan.profil' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Profil</p>
               </a>
@@ -76,7 +76,7 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{ route('admin.show.profil') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.profil' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Profil</p>
               </a>

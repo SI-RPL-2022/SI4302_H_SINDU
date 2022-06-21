@@ -22,6 +22,13 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
+        'no_hp',
+        'jenis_kelamin',
+        'nik',
+        'alamat',
+        'tgl_lahir',
+        'riwayat_pendidikan',
+        'foto_profile'
     ];
 
     /**

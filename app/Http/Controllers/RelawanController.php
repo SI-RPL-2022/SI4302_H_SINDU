@@ -8,6 +8,7 @@ use App\Models\Mata_Pelajaran;
 use App\Models\Materi;
 use App\Models\Request_Volunteer;
 use App\Models\Detail_Pengajuan_Relawan;
+use Hash;
 use Auth;
 
 class RelawanController extends Controller
@@ -199,4 +200,72 @@ class RelawanController extends Controller
         return redirect('/relawan/mendaftar')->with('success', 'Data Berhasil Tersimpan!');
     }
 
+    public function profil(){
+        $user=auth()->user();
+        $data['user']=$user;
+        return view('relawan.profil', $data);
+    }
+
+    public function updateProfil(Request $request){
+        session_start();
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'jenis_kelamin' => 'required',
+            'nik' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            'tgl_lahir' => 'required',
+            'riwayat_pendidikan' => 'required',
+            
+        ]);
+
+        $foto_profile = Auth::user();
+        if($request->hasfile('foto_profile')){
+            $file = $request->file('foto_profile');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('image/profil/', $filename);
+            $foto_profile->foto_profile = $filename;
+        }
+
+        $foto_profile->save();
+
+        $user = auth()->user();
+        $user -> update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'nik' => $request->nik,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'tgl_lahir' => $request->tgl_lahir,
+            'riwayat_pendidikan' => $request->riwayat_pendidikan,
+        ]);
+        $_SESSION['status']='Profil berhasil diperbarui!';
+        return redirect()->route('relawan.profil');
+    }
+
+    public function updatePassword (Request $request){
+        session_start();
+
+        $request->validate([
+            'current_password' => 'required|min:8',
+            'new_password' => 'required|min:8',
+            'con_password' => 'required|same:new_password',
+        ]);
+
+        $cur_user=auth()->user();
+
+        if(Hash::check($request->current_password,$cur_user->password)){
+            $cur_user->update([
+                'password'=>bcrypt($request->new_password)
+            ]);
+
+            $_SESSION['status']='Password berhasil diperbarui!';
+            return redirect()->route('relawan.profil');
+        } else{
+            return redirect()->route('relawan.profil');
+        }
+    }
 }

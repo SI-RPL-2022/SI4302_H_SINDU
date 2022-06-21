@@ -14,7 +14,9 @@ use App\Models\Mata_Pelajaran;
 use App\Models\Request_Volunteer;
 use App\Models\Donasi;
 use App\Models\About;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Hash;
 use Auth;
 
 class AdminController extends Controller
@@ -429,6 +431,62 @@ class AdminController extends Controller
             return redirect(route('admin.show.aboutus'))->with('success', 'Data Berhasil Ditambahkan');
         } else {
             return redirect(route('admin.show.testimoni'))->with('error', 'Terdapat Kesalahan!');
+    public function showProfil(){
+        $user=auth()->user();
+        $data['user']=$user;
+        return view('admin.show_profil', $data);
+    }
+
+    public function updateProfil(Request $request){
+        session_start();
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+        ]);
+
+        $foto_profile = Auth::user();
+        if($request->hasfile('foto_profile')){
+            $file = $request->file('foto_profile');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('image/profil/', $filename);
+            $foto_profile->foto_profile = $filename;
+        }
+
+        $foto_profile->save();
+        
+        $user = auth()->user();
+        $user -> update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+        ]);
+        $_SESSION['status']='Profil berhasil diperbarui!';
+
+        return redirect()->route('admin.show.profil');
+    }
+
+    public function updatePassword (Request $request){
+        session_start();
+
+        $request->validate([
+            'current_password' => 'required|min:8',
+            'new_password' => 'required|min:8',
+            'con_password' => 'required|same:new_password',
+        ]);
+
+        $cur_user=auth()->user();
+
+        if(Hash::check($request->current_password,$cur_user->password)){
+            $cur_user->update([
+                'password'=>bcrypt($request->new_password)
+            ]);
+
+            $_SESSION['status']='Password berhasil diperbarui!';
+            return redirect()->route('admin.show.profil');
+        } else{
+            return redirect()->route('admin.show.profil');
         }
     }
 }
