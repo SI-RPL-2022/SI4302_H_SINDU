@@ -61,6 +61,7 @@ Route::post('/admin/aboutus/store', [App\Http\Controllers\AdminController::class
 Route::get('/admin/profil', [App\Http\Controllers\AdminController::class, 'showProfil'])->name('admin.show.profil')->middleware('admin_level'); 
 Route::put('/admin/profil/update', [App\Http\Controllers\AdminController::class, 'updateProfil'])->name('admin.update.profil')->middleware('admin_level'); 
 Route::put('/admin/profil/updates', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('admin.update.password')->middleware('admin_level'); 
+Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'showDashboard'])->name('admin.show.dashboard')->middleware('admin_level'); 
 
 //RELAWAN ACCESS
 Route::get('/relawan', [App\Http\Controllers\RelawanController::class, 'index'])->name('relawan.index')->middleware('relawan_level');

@@ -33,14 +33,38 @@ class AdminController extends Controller
 
     /**
      * Show the application dashboard.
-     *
+     *->groupBy('month_name')
+        ->orderBy('createdAt')
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
-        return view('admin.index');
+        
+        $pengajuan_relawan = DB::table('pengajuan_relawan')               
+                ->select('status','jumlah_relawan','startDate')
+                ->get();
+        $pelamar = DB::table('detail_pengajuan_relawan')                
+                ->get();
+        $donasi_awal=DB::select(DB::raw("SELECT  MONTH(created_at) as bulan, sum(total_donasi) as total_donasi FROM donasi WHERE status = 'confirmed' GROUP BY MONTH(created_at);"));
+        $donasi="";
+        foreach ($donasi_awal as $val){
+            $donasi.="['".$val->bulan."',".$val->total_donasi."],";
+        }
+        return view('admin.index', compact('pengajuan_relawan','pelamar','donasi'));
     }
+    public function showDashboard()
+    {
+        $data = DB::table('testimoni')                
+                ->join('users', 'users.id', '=', 'testimoni.id_users')
+                ->select('testimoni.id_testimoni', 'testimoni.id_users', 'testimoni.nama', 'testimoni.role', 'testimoni.foto', 'testimoni.deskripsi_testimoni', 'testimoni.created_at')
+                ->where('testimoni.id_users', Auth::user()->id)
+                ->orderBy('testimoni.created_at', 'DESC')
+                ->get();
+        
 
+        return view('admin.dashboard', compact('data'));
+    }
     public function showTestimoni()
     {
         $data = DB::table('testimoni')                
