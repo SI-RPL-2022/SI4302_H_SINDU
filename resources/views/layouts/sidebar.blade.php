@@ -118,7 +118,8 @@
               </a>
             </li> 
             <li class="nav-item">
-              <a href="{{ route('admin.show.verifikasi.pengajuan') }}" class="nav-link">
+              <a href="{{ route('admin.show.verifikasi.pengajuan') }}" class="nav-link {{ request()->route()->getName() === 'admin.show.verifikasi.pengajuan' ||
+                request()->route()->getName() === 'admin.detail.verifikasi.pengajuan' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-hands-helping"></i>
                 <p>Pengajuan Relawan</p>                
               </a>

@@ -12,6 +12,7 @@ use App\Models\Materi;
 use App\Models\Kelas;
 use App\Models\Mata_Pelajaran;
 use App\Models\Request_Volunteer;
+use App\Models\Detail_Pengajuan_Relawan;
 use App\Models\Donasi;
 use App\Models\About;
 use App\Models\User;
@@ -289,7 +290,7 @@ class AdminController extends Controller
         $data->status = $request->status;                      
         $data->save();
 
-        \Mail::to($data->email)->send(new PengajuanRelawanAccepted($data));
+        // \Mail::to($data->email)->send(new PengajuanRelawanAccepted($data));
         
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
     }
@@ -305,7 +306,7 @@ class AdminController extends Controller
         $data->status = $request->status;                      
         $data->save();
 
-        \Mail::to($data->email)->send(new PengajuanRelawanDenied($data));
+        // \Mail::to($data->email)->send(new PengajuanRelawanDenied($data));
         
         return redirect(route('admin.show.verifikasi.pengajuan'))->with('success', 'Data Berhasil Diubah');
     }
@@ -515,5 +516,32 @@ class AdminController extends Controller
         } else{
             return redirect()->route('admin.show.profil');
         }
+    
+    public function detailVerifikasiPengajuan($id)
+    {   
+        $pengajuan = Request_Volunteer::find($id);
+        $data = Detail_Pengajuan_Relawan::where('id_pengajuan_relawan', $id)->get();
+        return view('admin.detail_pengajuan_relawan', compact('data', 'pengajuan'));
+    }
+
+    public function download($data, $id) {
+        $filepath = public_path('berkas/' .$data. '/' .$id. '');
+        $filename = $id;
+        return response()->download($filepath, $filename);
+    }
+
+    public function verifikasiRelawan($page, $data, $id)
+    {
+        $req = Detail_Pengajuan_Relawan::find($id);  
+        $req->status = $data;                      
+        $req->save();
+        return redirect( url('/admin/pengajuan-relawan/detail/'. $page .''))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteRelawan($page, $id)
+    {
+        DB::table('detail_pengajuan_relawan')->where('id_detail_pengajuan_relawan', $id)->delete();        
+
+        return redirect( url('/admin/pengajuan-relawan/detail/'. $page .''))->with('success', 'Data Berhasil Dihapus');
     }
 }

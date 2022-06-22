@@ -68,9 +68,9 @@
                                 @endif
                             </td>
                             <td class="text-nowrap">          
-                                <button type="button" class="btn btn-sm btn-secondary mb-1" data-toggle="modal" data-target="">
+                                <a href="{{ url('/admin/pengajuan-relawan/detail/'. $datas->id_pengajuan_relawan) }}" class="btn btn-sm btn-secondary mb-1">
                                     <i class="fas fa-eye"></i>
-                                </button>                                                                                            
+                                </a>                                                                                            
                                 <a href="{{ url('/admin/pengajuan-relawan/delete/'.$datas->id_pengajuan_relawan) }}" class="btn btn-sm btn-square btn-danger mb-1"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>                            
