@@ -22,6 +22,7 @@ class CreateDetailPengajuanRelawanTable extends Migration
             $table->string('nik'); 
             $table->string('berkas_ktp'); 
             $table->string('berkas_cv'); 
+            $table->string('status')->default('Diproses'); 
             $table->timestamps();
         });
     }
