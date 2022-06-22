@@ -39,7 +39,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{url('/relawan/mendaftar')}}" class="contact100-form validate-form" method="POST">
+                    <form action="{{url('/relawan/mendaftar')}}" enctype="multipart/form-data" class="contact100-form validate-form" method="POST">
                         @csrf
                         <label for="id_pengajuan_relawan" class="form-label hidden"></label>
                             <input type="number" class="form-control hidden" id="id_pengajuan_relawan" name="id_pengajuan_relawan" required hidden value="{{ $datas->id_pengajuan_relawan }}">

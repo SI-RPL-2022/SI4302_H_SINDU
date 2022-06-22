@@ -290,9 +290,30 @@ class AdminController extends Controller
     }
     
     public function detailVerifikasiPengajuan($id)
-    {        
-        $data = Detail_Pengajuan_Relawan::where('id_pengajuan_relawan', $id);
+    {   
+        $pengajuan = Request_Volunteer::find($id);
+        $data = Detail_Pengajuan_Relawan::where('id_pengajuan_relawan', $id)->get();
+        return view('admin.detail_pengajuan_relawan', compact('data', 'pengajuan'));
+    }
 
-        return view('admin.detail_pengajuan_relawan', compact('data'));
+    public function download($data, $id) {
+        $filepath = public_path('berkas/' .$data. '/' .$id. '');
+        $filename = $id;
+        return response()->download($filepath, $filename);
+    }
+
+    public function verifikasiRelawan($page, $data, $id)
+    {
+        $req = Detail_Pengajuan_Relawan::find($id);  
+        $req->status = $data;                      
+        $req->save();
+        return redirect( url('/admin/pengajuan-relawan/detail/'. $page .''))->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteRelawan($page, $id)
+    {
+        DB::table('detail_pengajuan_relawan')->where('id_detail_pengajuan_relawan', $id)->delete();        
+
+        return redirect( url('/admin/pengajuan-relawan/detail/'. $page .''))->with('success', 'Data Berhasil Dihapus');
     }
 }

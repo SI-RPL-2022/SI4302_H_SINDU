@@ -179,16 +179,21 @@ class RelawanController extends Controller
         }
         public function store_pendaftaran_relawan(Request $request)
         {
-        $model = new Detail_Pengajuan_Relawan();
-        $model->id_pengajuan_relawan = $request->id_pengajuan_relawan;
-        $model->nama_relawan = $request->nama_relawan;
-        $model->email_relawan = $request->email_relawan;
-        $model->nik = $request->nik;
-        $model->berkas_ktp = $request->berkas_ktp;
-        $model->berkas_cv = $request->berkas_cv;
-        $model->save();
-        
-        return redirect('/relawan/mendaftar')->with('success', 'Data Berhasil Tersimpan!');
-    }
+            $berkas_ktp = Auth::user()->id . '-ktp.'.$request->berkas_ktp->extension();
+            $request->berkas_ktp->move(public_path('berkas/jadi_relawan/'), $berkas_ktp);
+            $berkas_cv = Auth::user()->id .'-cv.'.$request->berkas_cv->extension();
+            $request->berkas_cv->move(public_path('berkas/jadi_relawan/'), $berkas_cv);
+
+            $model = new Detail_Pengajuan_Relawan();
+            $model->id_pengajuan_relawan = $request->id_pengajuan_relawan;
+            $model->nama_relawan = $request->nama_relawan;
+            $model->email_relawan = $request->email_relawan;
+            $model->nik = $request->nik;
+            $model->berkas_ktp = $berkas_ktp;
+            $model->berkas_cv = $berkas_cv;
+            $model->save();
+            
+            return redirect('/relawan/mendaftar')->with('success', 'Data Berhasil Tersimpan!');
+        }
 
 }
