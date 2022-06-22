@@ -14,6 +14,7 @@
                 margin-bottom:30px;
             }
         }
+    }
     </style>
 <body>
     <footer class="footer">

@@ -46,16 +46,17 @@
                         
                         <div class="mb-3">
                             <label for="nama_relawan" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="nama_relawan" name="nama_relawan" required>
+                            <input type="text" class="form-control" id="nama_relawan" name="nama_relawan" required value="{{ $user->name }}">
                         </div>
                         <div class="mb-3">
                             <label for="email_relawan" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email_relawan" aria-describedby="emailHelp" name="email_relawan" required>
+                            <input type="email" class="form-control" id="email_relawan" aria-describedby="emailHelp" name="email_relawan" required value="{{ $user->email }}">
                         </div>
                         <div class="mb-3">
                             <label for="nik" class="form-label">NIK</label>
-                            <input type="number" class="form-control" id="nik" name="nik" required>
+                            <input type="number" class="form-control" id="nik" name="nik" required value="{{ $user->nik }}">
                         </div>
+                        
                         <div class="mb-3">
                             <label for="berkas_ktp" class="form-label">Foto Selfie Bersama KTP</label>
                             <input class="form-control" type="file" id="berkas_ktp" name="berkas_ktp" required>

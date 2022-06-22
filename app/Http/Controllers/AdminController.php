@@ -455,6 +455,9 @@ class AdminController extends Controller
             return redirect(route('admin.show.aboutus'))->with('success', 'Data Berhasil Ditambahkan');
         } else {
             return redirect(route('admin.show.testimoni'))->with('error', 'Terdapat Kesalahan!');
+        }
+    }
+
     public function showProfil(){
         $user=auth()->user();
         $data['user']=$user;

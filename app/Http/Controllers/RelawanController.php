@@ -186,18 +186,21 @@ class RelawanController extends Controller
         $data = DB::table('pengajuan_relawan')                
                 ->select('id_pengajuan_relawan','nama_organisasi','email','no_hp','deskripsi','deskripsi_lengkap','jumlah_relawan','startDate','endDate','syarat_umum_pertama','syarat_umum_kedua','foto_lokasi','berkas')
                 ->get();
-        return view('relawan.pendaftaran_relawan', compact('data'));
+        
+        $user = auth()->user();
+        return view('relawan.pendaftaran_relawan', compact('data','user'));
         }
-    
-        public function create_request_pendaftaran_relawan()
-        {
+  
+    public function create_request_pendaftaran_relawan()
+    {
             $model = new Detail_Pengajuan_Relawan();
             return view('relawan.pendaftaran_relawan', compact(
                 'model'
             ));
         }
-        public function store_pendaftaran_relawan(Request $request)
-        {
+
+    public function store_pendaftaran_relawan(Request $request)
+    {
         $model = new Detail_Pengajuan_Relawan();
         $model->id_pengajuan_relawan = $request->id_pengajuan_relawan;
         $model->nama_relawan = $request->nama_relawan;

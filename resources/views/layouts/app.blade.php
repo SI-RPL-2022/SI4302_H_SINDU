@@ -23,6 +23,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css') }}" />
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css') }}" /> --}}
+    <script src="https://kit.fontawesome.com/f1223f01a6.js" crossorigin="anonymous"></script>
+    @yield('extend-css')
 </head>
 
 <body>
