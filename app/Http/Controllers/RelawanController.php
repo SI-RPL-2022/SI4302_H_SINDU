@@ -10,7 +10,7 @@ use App\Models\Request_Volunteer;
 use App\Models\Detail_Pengajuan_Relawan;
 use Hash;
 use Auth;
-
+ 
 class RelawanController extends Controller
 {
     /**
@@ -30,7 +30,17 @@ class RelawanController extends Controller
      */
     public function index()
     {
-        return view('relawan.index');
+        $pengajuan_relawan = DB::table('pengajuan_relawan')               
+                ->select('status','jumlah_relawan','startDate')
+                ->get();
+        $materi = DB::table('materi')                
+                ->get();
+        $kebutuha_relawan_raw=DB::select(DB::raw("SELECT  MONTH(startDate) as bulan, sum(jumlah_relawan) as jumlah_relawan FROM pengajuan_relawan GROUP BY MONTH(startDate);"));
+        $kebutuhan_relawan="";
+        foreach ($kebutuha_relawan_raw as $val){
+            $kebutuhan_relawan.="['".$val->bulan."',".$val->jumlah_relawan."],";
+        }
+        return view('relawan.index', compact('pengajuan_relawan','materi','kebutuhan_relawan'));
     }
 
     public function showMateri()
